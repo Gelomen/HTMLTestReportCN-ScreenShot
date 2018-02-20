@@ -1,0 +1,2 @@
+# HTMLTestReportCN_ScreenShot
+带有截图功能的HTMLTestReportCN
