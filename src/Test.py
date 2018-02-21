@@ -17,7 +17,14 @@ class TestClass(unittest.TestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def test1_title(self):
+    def test1_find_input(self):
+        try:
+            self.browser.find_element_by_xpath("//input[@id='kw']")
+        except Exception:
+            file_name = self.daf.get_screen_shot(self.browser)
+            raise Exception(file_name)
+
+    def test2_title(self):
         title = self.browser.title
         try:
             self.assertEqual(title, "百度一下，你就知道!", "Title不一致！")

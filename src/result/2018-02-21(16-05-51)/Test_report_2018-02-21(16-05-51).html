@@ -136,9 +136,9 @@ function html_escape(s) {
 <div class='heading'>
 <h1 style="font-family: Microsoft YaHei">Test Report</h1>
 <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-02-21 15:55:40</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:08.314152</p>
-<p class='attribute'><strong>测试结果 : </strong> 共 1，失败 1，通过率 = 0.00%</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-02-21 16:05:53</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:16.355610</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
 <p class='attribute'><strong>失败的模块 : </strong> Test</p>
 
 <p class='description'>测试报告</p>
@@ -147,11 +147,11 @@ function html_escape(s) {
 
 
 <p id='show_detail_line'>
-<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 0.00% }</a>
-<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 0 }</a>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 50.00% }</a>
+<a class="btn btn-success" href='javascript:showCase(2)'>通过{ 1 }</a>
 <a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 1 }</a>
 <a class="btn btn-warning" href='javascript:showCase(3)'>错误{ 0 }</a>
-<a class="btn btn-info" href='javascript:showCase(4)'>所有{ 1 }</a>
+<a class="btn btn-info" href='javascript:showCase(4)'>所有{ 2 }</a>
 </p>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
 <colgroup>
@@ -174,28 +174,33 @@ function html_escape(s) {
 
 <tr class='failClass warning'>
     <td>Test.TestClass</td>
+    <td class="text-center">2</td>
+    <td class="text-center">1</td>
     <td class="text-center">1</td>
     <td class="text-center">0</td>
-    <td class="text-center">1</td>
-    <td class="text-center">0</td>
-    <td class="text-center">8.31秒</td>
-    <td class="text-center"><a href="javascript:showClassDetail('c1',1)" class="detail" id='c1'>详细</a></td>
+    <td class="text-center">16.36秒</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>详细</a></td>
 </tr>
 
-<tr id='ft1_1' class='none'>
-    <td class='failCase' style="vertical-align: middle"><div class='testcase'>test1_title</div></td>
+<tr id='pt1_1' class='hiddenRow'>
+    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test1_find_input</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+</tr>
+
+<tr id='ft1_2' class='none'>
+    <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2_title</div></td>
     <td colspan='5' align='center'>
     <!--默认收起错误信息 -Findyou
-    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_1'>失败</button>
-    <div id='div_ft1_1' class="collapse">  -->
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+    <div id='div_ft1_2' class="collapse">  -->
 
     <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
-    <button id='btn_ft1_1' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_1'>失败</button>
-    <div id='div_ft1_1' class="collapse in">
+    <button id='btn_ft1_2' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+    <div id='div_ft1_2' class="collapse in">
     <pre style="text-align:left">
     
-ft1_1: Traceback (most recent call last):
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\src\Test.py", line 23, in test1_title
+ft1_2: Traceback (most recent call last):
+  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\src\Test.py", line 30, in test2_title
     self.assertEqual(title, "百度一下，你就知道!", "Title不一致！")
 AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
 - 百度一下，你就知道
@@ -206,7 +211,7 @@ AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
 During handling of the above exception, another exception occurred:
 
 Traceback (most recent call last):
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\src\Test.py", line 26, in test1_title
+  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\src\Test.py", line 33, in test2_title
     raise AssertionError(file_name)
 AssertionError: fileStart[1.png]fileEnd
 
@@ -219,12 +224,12 @@ AssertionError: fileStart[1.png]fileEnd
 
 <tr id='total_row' class="text-center active">
     <td>总计</td>
+    <td>2</td>
+    <td>1</td>
     <td>1</td>
     <td>0</td>
-    <td>1</td>
-    <td>0</td>
-    <td>8.31秒</td>
-    <td>通过率：0.00%</td>
+    <td>16.36秒</td>
+    <td>通过率：50.00%</td>
 </tr>
 </table>
 
