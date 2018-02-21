@@ -794,7 +794,7 @@ class HTMLTestRunner(Template_mixin):
             output = saxutils.escape(uo+ue),
         )
 
-        # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字
+        # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字  -- Gelomen
         u = uo+ue
         screen_shot = u[u.find('fileStart[')+10:u.find(']fileEnd')]
 
