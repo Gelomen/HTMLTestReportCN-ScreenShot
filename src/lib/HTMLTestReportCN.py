@@ -839,14 +839,6 @@ class DirAndFiles(object):
         new_dir = os.path.join(self.path, lists[-1])
         return new_dir
 
-    def get_new_file(self):
-        new_dir = self.get_new_dir()
-        lists = os.listdir(new_dir)
-        # 按时间排序
-        lists.sort(key=lambda fn: os.path.getmtime(new_dir + "\\" + fn))
-        new_file = lists[-1]
-        return "fileStart[" + new_file + "]fileEnd"
-
     def get_screen_shot(self, browser):
 
         # 获取最新文件夹的名字，并将截图保存在该文件夹下
@@ -864,8 +856,8 @@ class DirAndFiles(object):
                 break
 
         browser.get_screenshot_as_file(img_path)
-        new_file = self.get_new_file()
-        return new_file
+        img_name = str(i) + ".png"
+        return "fileStart[" + img_name + "]fileEnd"
 
 
 ##############################################################################
