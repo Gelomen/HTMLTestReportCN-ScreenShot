@@ -10,7 +10,7 @@ from src.lib.HTMLTestReportCN import DirAndFiles
 class TestClass(unittest.TestCase):
 
     def setUp(self):
-        self.browser = webdriver.Chrome(executable_path="./lib/chromedriver.exe")
+        self.browser = webdriver.Chrome(executable_path="../../lib/chromedriver.exe")
         self.browser.get("https://www.baidu.com")
         self.daf = DirAndFiles()
 

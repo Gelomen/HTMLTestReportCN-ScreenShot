@@ -419,8 +419,8 @@ table       { font-size: 100%; }
 </tr>
 """ # variables: (style, desc, count, Pass, fail, error, cid)
 
-    #失败 的样式，去掉原来JS效果，美化展示效果  -Findyou / 美化类名上下居中 -- Gelomen
-    REPORT_TEST_WITH_OUTPUT_TMPL = r"""
+    #失败 的样式，去掉原来JS效果，美化展示效果  -Findyou / 美化类名上下居中，有截图列 -- Gelomen
+    REPORT_TEST_WITH_OUTPUT_TMPL_1 = r"""
 <tr id='%(tid)s' class='%(Class)s'>
     <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(desc)s</div></td>
     <td colspan='5' align='center'>
@@ -439,6 +439,27 @@ table       { font-size: 100%; }
     <td class="text-center" style="vertical-align: middle"><a href="%(screenShot)s" target="_blank">截图_%(screenShot)s</a></td>
 </tr>
 """ # variables: (tid, Class, style, desc, status)
+
+    # 失败 的样式，去掉原来JS效果，美化展示效果  -Findyou / 美化类名上下居中，无截图列 -- Gelomen
+    REPORT_TEST_WITH_OUTPUT_TMPL_0 = r"""
+    <tr id='%(tid)s' class='%(Class)s'>
+        <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(desc)s</div></td>
+        <td colspan='5' align='center'>
+        <!--默认收起错误信息 -Findyou
+        <button id='btn_%(tid)s' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_%(tid)s'>%(status)s</button>
+        <div id='div_%(tid)s' class="collapse">  -->
+
+        <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
+        <button id='btn_%(tid)s' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_%(tid)s'>%(status)s</button>
+        <div id='div_%(tid)s' class="collapse in">
+        <pre style="text-align:left">
+        %(script)s
+        </pre>
+        </div>
+        </td>
+        <td class='%(style)s' style="vertical-align: middle"></td>
+    </tr>
+    """  # variables: (tid, Class, style, desc, status)
 
     # 通过 的样式，加标签效果  -Findyou / 美化类名上下居中 -- Gelomen
     REPORT_TEST_NO_OUTPUT_TMPL = r"""
@@ -576,10 +597,12 @@ class _TestResult(TestResult):
             sys.stderr.write('\n')
 
 
+# 新增 need_screen_shot 参数，0为无需截图，1为需要截图  -- Gelomen
 class HTMLTestRunner(Template_mixin):
     """
     """
-    def __init__(self, stream=sys.stdout, verbosity=2 ,title=None,description=None,tester=None):
+    def __init__(self, stream=sys.stdout, verbosity=2, need_screen_shot=None,title=None,description=None,tester=None):
+        self.ns = need_screen_shot
         self.stream = stream
         self.verbosity = verbosity
         if title is None:
@@ -770,7 +793,10 @@ class HTMLTestRunner(Template_mixin):
         name = t.id().split('.')[-1]
         doc = t.shortDescription() or ""
         desc = doc and ('%s: %s' % (name, doc)) or name
-        tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL or self.REPORT_TEST_NO_OUTPUT_TMPL
+        if self.ns == 0:
+            tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_0 or self.REPORT_TEST_NO_OUTPUT_TMPL
+        elif self.ns == 1:
+            tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_1 or self.REPORT_TEST_NO_OUTPUT_TMPL
 
         # utf-8 支持中文 - Findyou
          # o and e should be byte string because they are collected from stdout and stderr?
@@ -794,21 +820,33 @@ class HTMLTestRunner(Template_mixin):
             output = saxutils.escape(uo+ue),
         )
 
-        # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字  -- Gelomen
-        u = uo+ue
-        screen_shot = u[u.find('fileStart[')+10:u.find(']fileEnd')]
+        if self.ns == 0:
+            row = tmpl % dict(
+                tid=tid,
+                Class=(n == 0 and 'hiddenRow' or 'none'),
+                style=n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'passCase'),
+                desc=desc,
+                script=script,
+                status=self.STATUS[n],
+            )
+            rows.append(row)
+        elif self.ns == 1:
+            # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字  -- Gelomen
+            u = uo + ue
+            screen_shot = u[u.find('fileStart[') + 10:u.find(']fileEnd')]
 
-        row = tmpl % dict(
-            tid = tid,
-            Class = (n == 0 and 'hiddenRow' or 'none'),
-            style = n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'passCase'),
-            desc = desc,
-            script = script,
-            status = self.STATUS[n],
-            # 添加截图字段
-            screenShot = screen_shot
-        )
-        rows.append(row)
+            row = tmpl % dict(
+                tid=tid,
+                Class=(n == 0 and 'hiddenRow' or 'none'),
+                style=n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'passCase'),
+                desc=desc,
+                script=script,
+                status=self.STATUS[n],
+                # 添加截图字段
+                screenShot=screen_shot
+            )
+            rows.append(row)
+
         if not has_output:
             return
 
@@ -820,7 +858,7 @@ class HTMLTestRunner(Template_mixin):
 class DirAndFiles(object):
 
     def __init__(self):
-        self.path = "./result/"
+        self.path = "../../result/"
 
     def create_dir(self):
         now = str(datetime.datetime.now().strftime("%Y-%m-%d(%H-%M-%S)"))

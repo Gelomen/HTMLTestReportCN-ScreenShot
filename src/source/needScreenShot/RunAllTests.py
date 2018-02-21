@@ -27,7 +27,9 @@ class RunAllTests(object):
         file_path = new_dir + "/Test_report_" + now + ".html"
 
         fp = open(file_path, "wb")
-        runner = HTMLTestReportCN.HTMLTestRunner(stream=fp, title=self.title, description=self.description, tester=input("请输入你的名字："))
+
+        # need_screen = 0，表示是UI自动化测试，需执行截图
+        runner = HTMLTestReportCN.HTMLTestRunner(stream=fp, need_screen_shot=1, title=self.title, description=self.description, tester=input("请输入你的名字："))
         runner.run(test_suite)
         fp.close()
 
