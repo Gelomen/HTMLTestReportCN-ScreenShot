@@ -816,7 +816,7 @@ class HTMLTestRunner(Template_mixin):
         return self.ENDING_TMPL
 
 
-# 集成创建文件夹、保存截图、获得截图名字的类 -- Gelomen
+# 集成创建文件夹、保存截图、获得截图名字等方法，与HTMLTestReportCN交互从而实现嵌入截图  -- Gelomen
 class DirAndFiles(object):
 
     def __init__(self):
