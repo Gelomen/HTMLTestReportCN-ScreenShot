@@ -793,10 +793,10 @@ class HTMLTestRunner(Template_mixin):
         name = t.id().split('.')[-1]
         doc = t.shortDescription() or ""
         desc = doc and ('%s: %s' % (name, doc)) or name
-        if self.ns == 0:
-            tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_0 or self.REPORT_TEST_NO_OUTPUT_TMPL
-        elif self.ns == 1:
+        if self.ns >= 1:
             tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_1 or self.REPORT_TEST_NO_OUTPUT_TMPL
+        else:
+            tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_0 or self.REPORT_TEST_NO_OUTPUT_TMPL
 
         # utf-8 支持中文 - Findyou
          # o and e should be byte string because they are collected from stdout and stderr?
@@ -820,17 +820,7 @@ class HTMLTestRunner(Template_mixin):
             output = saxutils.escape(uo+ue),
         )
 
-        if self.ns == 0:
-            row = tmpl % dict(
-                tid=tid,
-                Class=(n == 0 and 'hiddenRow' or 'none'),
-                style=n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'passCase'),
-                desc=desc,
-                script=script,
-                status=self.STATUS[n],
-            )
-            rows.append(row)
-        elif self.ns == 1:
+        if self.ns >= 1:
             # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字  -- Gelomen
             u = uo + ue
             screen_shot = u[u.find('fileStart[') + 10:u.find(']fileEnd')]
@@ -844,6 +834,16 @@ class HTMLTestRunner(Template_mixin):
                 status=self.STATUS[n],
                 # 添加截图字段
                 screenShot=screen_shot
+            )
+            rows.append(row)
+        else:
+            row = tmpl % dict(
+                tid=tid,
+                Class=(n == 0 and 'hiddenRow' or 'none'),
+                style=n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'passCase'),
+                desc=desc,
+                script=script,
+                status=self.STATUS[n],
             )
             rows.append(row)
 
