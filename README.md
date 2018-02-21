@@ -6,7 +6,7 @@
 > * findyou 大神原地址：https://github.com/findyou/HTMLTestRunnerCN ；
 > * boafantasy 大神原地址：https://github.com/boafantasy/HTMLTestRunnerCN ；
 
-***
+
 ## 步骤
 ### 一、报告文档需截图
 #### 1. 初始化
