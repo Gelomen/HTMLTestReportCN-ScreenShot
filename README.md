@@ -18,14 +18,15 @@ def setUp(self):
     self.daf = DirAndFiles()
 ```
 #### 2. 执行截图和获取截图名字
-测试用例的断言或操作，在抛出的Exception里获取执行截图操作，并返回截图名字，然后放入Exception跟随异常一起抛出，**注意：截图方法用的是selenium的，如需用其他方法截图，请自行到 `HTMLTestReportCN.py` 修改 `get_screen_shot()` 方法**
+测试用例的断言或操作，在抛出的Exception里获取执行截图操作，并返回截图名字，然后 `print()` 出来跟随异常一起抛出，**注意：截图方法用的是selenium的，如需用其他方法截图，请自行到 `HTMLTestReportCN.py` 修改 `get_screen_shot()` 方法**
 ```python
 def test1_find_input(self):
     try:
         self.browser.find_element_by_xpath("//input[@id='kw']")
     except Exception:
         img_name = self.daf.get_screen_shot(self.browser)
-        raise Exception(img_name)
+        print(img_name)
+        raise
 ```
 #### 3. 启动时创建文件夹
 启动代码里，调用 `create_dir()`，会根据时间创建文件夹，把截图和报告存入对应的文件夹
