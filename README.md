@@ -41,7 +41,7 @@ if __name__ == "__main__":
 目前为止，在测试用例文件启动后，出现异常可以实现截图功能
 
 #### 6. 生成HTML测试报告文档
-新建 `RunAllTests.py`，如何封装可以自行决定，**主要需要注意的是：`HTMLTestReportCN.HTMLTestRunner()` 需加入参数 `need_screen_shot=1` 以启用将error截图嵌入HTML功能，同时 `RunAllTests.py` 存放的路径需要跟普通用例文件具有相同目录结构，以保证正常读取第4点的报告路径**
+新建 `RunAllTests.py`，如何封装可以自行决定，**主要需要注意的是：`HTMLTestReportCN.HTMLTestRunner()` 需加入参数 `need_screen_shot=1` 以启用将error截图嵌入HTML功能，同时 `RunAllTests.py` 存放的路径需要跟普通用例文件具有相同目录结构，以保证正常读取```第4点```的报告路径**
 ```python
 class RunAllTests(object):
 
