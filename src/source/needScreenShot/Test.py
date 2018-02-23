@@ -22,7 +22,8 @@ class TestClass(unittest.TestCase):
             self.browser.find_element_by_xpath("//input[@id='kw']")
         except Exception:
             img_name = self.daf.get_screen_shot(self.browser)
-            raise Exception(img_name)
+            print(img_name)
+            raise
 
     def test2_title(self):
         title = self.browser.title
@@ -30,7 +31,8 @@ class TestClass(unittest.TestCase):
             self.assertEqual(title, "百度一下，你就知道!", "Title不一致！")
         except AssertionError:
             img_name = self.daf.get_screen_shot(self.browser)
-            raise AssertionError(img_name)
+            print(img_name)
+            raise
 
 
 if __name__ == "__main__":

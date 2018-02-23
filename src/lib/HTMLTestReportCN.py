@@ -823,7 +823,7 @@ class HTMLTestRunner(Template_mixin):
         if self.ns >= 1:
             # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字  -- Gelomen
             u = uo + ue
-            screen_shot = u[u.find('fileStart[') + 10:u.find(']fileEnd')]
+            screen_shot = u[u.find('imgStart[') + 9:u.find(']imgEnd')]
 
             row = tmpl % dict(
                 tid=tid,
@@ -895,7 +895,7 @@ class DirAndFiles(object):
 
         browser.get_screenshot_as_file(img_path)
         img_name = str(i) + ".png"
-        return "fileStart[" + img_name + "]fileEnd"
+        return "imgStart[" + img_name + "]imgEnd"
 
 
 ##############################################################################
