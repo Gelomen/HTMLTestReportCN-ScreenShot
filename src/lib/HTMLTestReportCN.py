@@ -602,7 +602,7 @@ class HTMLTestRunner(Template_mixin):
     """
     """
     def __init__(self, stream=sys.stdout, verbosity=2, need_screen_shot=None,title=None,description=None,tester=None):
-        self.ns = need_screen_shot
+        self.need_screen_shot = need_screen_shot
         self.stream = stream
         self.verbosity = verbosity
         if title is None:
@@ -793,7 +793,7 @@ class HTMLTestRunner(Template_mixin):
         name = t.id().split('.')[-1]
         doc = t.shortDescription() or ""
         desc = doc and ('%s: %s' % (name, doc)) or name
-        if self.ns >= 1:
+        if self.need_screen_shot >= 1:
             tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_1 or self.REPORT_TEST_NO_OUTPUT_TMPL
         else:
             tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_0 or self.REPORT_TEST_NO_OUTPUT_TMPL
@@ -820,7 +820,7 @@ class HTMLTestRunner(Template_mixin):
             output = saxutils.escape(uo+ue),
         )
 
-        if self.ns >= 1:
+        if self.need_screen_shot >= 1:
             # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字  -- Gelomen
             u = uo + ue
             screen_shot = u[u.find('imgStart[') + 9:u.find(']imgEnd')]
