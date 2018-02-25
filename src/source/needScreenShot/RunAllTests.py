@@ -9,8 +9,8 @@ from src.lib import HTMLTestReportCN
 
 class RunAllTests(object):
 
-    def __init__(self, path="."):
-        self.test_case_path = path
+    def __init__(self):
+        self.test_case_path = "."
         self.title = "Test Report"
         self.description = "测试报告"
 

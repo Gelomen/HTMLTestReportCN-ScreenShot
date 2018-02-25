@@ -3,7 +3,6 @@
 """"" 载入场景测试用例 """""
 
 import unittest
-from src.source.dontNeedScreenShot.RunAllTests import RunAllTests
 
 
 class TestClass(unittest.TestCase):
@@ -29,4 +28,4 @@ class TestClass(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    RunAllTests().run()
+    unittest.main()
