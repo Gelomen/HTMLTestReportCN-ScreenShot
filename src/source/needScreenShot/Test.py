@@ -34,4 +34,5 @@ class TestClass(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    DirAndFiles().create_dir()
     unittest.main()
