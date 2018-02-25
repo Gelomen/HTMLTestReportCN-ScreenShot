@@ -5,6 +5,7 @@
 import unittest
 from selenium import webdriver
 from src.lib.HTMLTestReportCN import DirAndFiles
+from src.source.needScreenShot.RunAllTests import RunAllTests
 
 
 class TestClass(unittest.TestCase):
@@ -34,6 +35,4 @@ class TestClass(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    # 启动测试时创建文件夹
-    DirAndFiles().create_dir()
-    unittest.main()
+    RunAllTests().run()
