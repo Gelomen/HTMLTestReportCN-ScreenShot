@@ -34,11 +34,6 @@ if __name__ == "__main__":
     DirAndFiles().create_dir()
     unittest.main()
 ```
-也可以直接调用 `第6点` `RunAllTests()` 的 `run()` 函数，可以直接生成测试报告
-```python
-if __name__ == "__main__":
-    RunAllTests().run()
-```
 #### 4. 报告路径
 到 **HTMLTestReportCN.py**，找到 `class DirAndFiles(object)`，修改初始化的 `self.path = "../../result/"` 报告路径为你自己的，**注意：目录结构需要先创建好！且最好是以测试用例为相对路径，而不是用绝对路径**
 
@@ -50,8 +45,8 @@ if __name__ == "__main__":
 ```python
 class RunAllTests(object):
 
-        def __init__(self, path="."):
-        self.test_case_path = path
+    def __init__(self):
+        self.test_case_path = "."
         self.title = "Test Report"
         self.description = "测试报告"
 
