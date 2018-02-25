@@ -895,7 +895,7 @@ class DirAndFiles(object):
 
         browser.get_screenshot_as_file(img_path)
         img_name = str(i) + ".png"
-        return "imgStart[" + img_name + "]imgEnd"
+        print("imgStart[" + img_name + "]imgEnd")
 
 
 ##############################################################################
