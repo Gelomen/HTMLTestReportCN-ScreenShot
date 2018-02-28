@@ -28,8 +28,8 @@ class RunAllTests(object):
 
         fp = open(file_path, "wb")
 
-        # need_screen_shot = 1，表示是UI自动化测试，需执行截图
-        runner = HTMLTestReportCN.HTMLTestRunner(stream=fp, need_screen_shot=1, title=self.title, description=self.description, tester=input("请输入你的名字："))
+        # need_screenshot = 1，表示是UI自动化测试，需执行截图
+        runner = HTMLTestReportCN.HTMLTestRunner(stream=fp, need_screenshot=1, title=self.title, description=self.description, tester=input("请输入你的名字："))
         runner.run(test_suite)
         fp.close()
 

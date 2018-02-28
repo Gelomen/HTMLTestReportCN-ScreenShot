@@ -450,7 +450,7 @@ table       { font-size: 100%; }
     </pre>
     </div>
     </td>
-    <td class="text-center" style="vertical-align: middle">浏览器版本：%(browser)s</br></br><a href="%(screenShot)s" target="_blank">截图_%(screenShot)s</a></td>
+    <td class="text-center" style="vertical-align: middle">浏览器版本：%(browser)s</br></br><a href="%(screenshot)s" target="_blank">截图_%(screenshot)s</a></td>
 </tr>
 """ # variables: (tid, Class, style, desc, status)
 
@@ -611,12 +611,12 @@ class _TestResult(TestResult):
             sys.stderr.write('\n')
 
 
-# 新增 need_screen_shot 参数，0为无需截图，1为需要截图  -- Gelomen
+# 新增 need_screenshot 参数，0为无需截图，1为需要截图  -- Gelomen
 class HTMLTestRunner(Template_mixin):
     """
     """
-    def __init__(self, stream=sys.stdout, verbosity=2, need_screen_shot=None,title=None,description=None,tester=None):
-        self.need_screen_shot = need_screen_shot
+    def __init__(self, stream=sys.stdout, verbosity=2, need_screenshot=None,title=None,description=None,tester=None):
+        self.need_screenshot = need_screenshot
         self.stream = stream
         self.verbosity = verbosity
         if title is None:
@@ -793,7 +793,7 @@ class HTMLTestRunner(Template_mixin):
         name = t.id().split('.')[-1]
         doc = t.shortDescription() or ""
         desc = doc and ('%s: %s' % (name, doc)) or name
-        if self.need_screen_shot >= 1:
+        if self.need_screenshot >= 1:
             tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_1 or self.REPORT_TEST_NO_OUTPUT_TMPL
         else:
             tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_0 or self.REPORT_TEST_NO_OUTPUT_TMPL
@@ -820,10 +820,10 @@ class HTMLTestRunner(Template_mixin):
             output = saxutils.escape(uo+ue),
         )
 
-        if self.need_screen_shot >= 1:
+        if self.need_screenshot >= 1:
             # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字  -- Gelomen
             u = uo + ue
-            screen_shot = u[u.find('errorImg[') + 9:u.find(']errorImg')]
+            screenshot = u[u.find('errorImg[') + 9:u.find(']errorImg')]
             browser = u[u.find('browser[') + 8:u.find(']browser')]
 
             row = tmpl % dict(
@@ -834,7 +834,7 @@ class HTMLTestRunner(Template_mixin):
                 script=script,
                 status=self.STATUS[n],
                 # 添加截图字段
-                screenShot=screen_shot,
+                screenshot=screenshot,
                 # 添加浏览器版本字段
                 browser=browser
             )
@@ -879,7 +879,7 @@ class DirAndFiles(object):
         new_dir = os.path.join(self.path, lists[-1])
         return new_dir
 
-    def get_screen_shot(self, browser):
+    def get_screenshot(self, browser):
 
         # 获取最新文件夹的名字，并将截图保存在该文件夹下
         i = 1
