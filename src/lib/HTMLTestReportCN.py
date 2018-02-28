@@ -436,7 +436,7 @@ table       { font-size: 100%; }
     </pre>
     </div>
     </td>
-    <td class="text-center" style="vertical-align: middle"><a href="%(screenShot)s" target="_blank">截图_%(screenShot)s</a></td>
+    <td class="text-center" style="vertical-align: middle">浏览器版本：%(browser)s</br></br><a href="%(screenShot)s" target="_blank">截图_%(screenShot)s</a></td>
 </tr>
 """ # variables: (tid, Class, style, desc, status)
 
@@ -627,7 +627,9 @@ class HTMLTestRunner(Template_mixin):
         test(result)
         self.stopTime = datetime.datetime.now()
         self.generateReport(test, result)
-        print('\nTime Elapsed: %s' % (self.stopTime-self.startTime), file=sys.stderr)
+        print("\033[36;0m--------------------- 测试结束 ---------------------\033[0m")
+        print()
+        print('\033[36;0m------------- 合计耗时: %s -------------\033[0m' % (self.stopTime-self.startTime), file=sys.stderr)
         return result
 
 
@@ -666,28 +668,12 @@ class HTMLTestRunner(Template_mixin):
                 self.passrate = "0.00 %"
         else:
             status = 'none'
-        # 失败模块列表统计逻辑start
-        # 为了发邮件的时候确定知道哪个模块失败了，这里在报告的头里面单独添加一行失败模块的列表
-        # 把用例结果和对应的模块名称单独提取到一个list
-        module_result_list = [(status, re.split(" |\(|\.", str(name))[2]) for status, name, _, _, _ in result.result]
-        failed_report_module_list = []  # 初始化模块失败列表
-        for module_result in module_result_list:
-            if module_result[0] != 0:  # 如果结果是失败的，则把模块名字放到失败模块列表
-                failed_report_module_list.append(module_result[1])
-        failed_report_module_list = list(set(failed_report_module_list))  # 去重
-        if len(failed_report_module_list) == 0:  # 如果没有失败的模块，失败模块日志为固定描述，否则用“，”连接
-            failed_string = "无失败模块"
-        elif len(failed_report_module_list) == 1:
-            failed_string = "".join(failed_report_module_list)
-        else:
-            failed_string = ",".join(failed_report_module_list)
-        # 失败模块列表统计逻辑end
+
         return [
             ('测试人员', self.tester),
             ('开始时间',startTime),
             ('合计耗时',duration),
-            ('测试结果',status + "，通过率 = "+self.passrate),
-            ('失败的模块', failed_string)
+            ('测试结果',status + "，通过率 = "+self.passrate)
         ]
 
     def generateReport(self, test, result):
@@ -823,7 +809,8 @@ class HTMLTestRunner(Template_mixin):
         if self.need_screen_shot >= 1:
             # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字  -- Gelomen
             u = uo + ue
-            screen_shot = u[u.find('imgStart[') + 9:u.find(']imgEnd')]
+            screen_shot = u[u.find('errorImg[') + 9:u.find(']errorImg')]
+            browser = u[u.find('browser[') + 8:u.find(']browser')]
 
             row = tmpl % dict(
                 tid=tid,
@@ -833,9 +820,10 @@ class HTMLTestRunner(Template_mixin):
                 script=script,
                 status=self.STATUS[n],
                 # 添加截图字段
-                screenShot=screen_shot
+                screenShot=screen_shot,
+                # 添加浏览器版本字段
+                browser=browser
             )
-            rows.append(row)
         else:
             row = tmpl % dict(
                 tid=tid,
@@ -845,7 +833,7 @@ class HTMLTestRunner(Template_mixin):
                 script=script,
                 status=self.STATUS[n],
             )
-            rows.append(row)
+        rows.append(row)
 
         if not has_output:
             return
@@ -895,7 +883,13 @@ class DirAndFiles(object):
 
         browser.get_screenshot_as_file(img_path)
         img_name = str(i) + ".png"
-        print("imgStart[" + img_name + "]imgEnd")
+
+        browser_type = str(browser).split(".")[2]
+        browser_version = browser.capabilities["version"]
+        browser_msg = browser_type + "(" + browser_version + ")"
+
+        print("errorImg[" + img_name + "]errorImg")
+        print("browser[" + browser_msg + "]browser")
 
 
 ##############################################################################

@@ -33,8 +33,6 @@ class RunAllTests(object):
         runner.run(test_suite)
         fp.close()
 
-        print("\033[36;0m--------------------- 测试结束 ---------------------\033[0m")
-
 
 if __name__ == "__main__":
     RunAllTests().run()
