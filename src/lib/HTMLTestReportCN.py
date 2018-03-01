@@ -626,6 +626,7 @@ class _TestResult(TestResult):
             sys.stderr.write('  E  ')
             sys.stderr.write('\n')
 
+        # 添加收集错误用例名字 -- Gelomen
         if len(self.errorCase) > 0:
             self.errorCase += "<br>" + str(test)
         else:
@@ -646,6 +647,7 @@ class _TestResult(TestResult):
             sys.stderr.write('  F  ')
             sys.stderr.write('\n')
 
+        # 添加收集失败用例名字 -- Gelomen
         if len(self.failCase) > 0:
             self.failCase += "<br>" + str(test)
         else:
@@ -767,6 +769,7 @@ class HTMLTestRunner(Template_mixin):
     def _generate_heading(self, report_attrs):
         a_lines = []
         for name, value in report_attrs:
+            # 如果是 失败用例 或 错误用例合集，则不进行转义 -- Gelomen
             if name == "失败用例合集" or name == "错误用例合集":
                 line = self.HEADING_ATTRIBUTE_TMPL % dict(
                     name=name,
