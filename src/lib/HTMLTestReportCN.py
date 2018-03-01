@@ -75,6 +75,7 @@ Version 0.9.1 -- Gelomen
 * 使用UI自动化测试时，增加 错误、失败 详细信息的 浏览器类型和版本
 
 Version 0.9.0 -- Gelomen
+* 可通过 `need_screenshot=1` 作为开关，将报告开启截图功能
 * 增加 失败 和 错误 详细信息的 截图链接
 
 Version 0.8.4 -- Gelomen

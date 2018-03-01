@@ -11,6 +11,7 @@
 >* 使用UI自动化测试时，增加 错误、失败 详细信息的 浏览器类型和版本
 
 >Version 0.9.0 -- Gelomen
+>* 可通过 `need_screenshot=1` 作为开关，将报告开启截图功能
 >* 增加 失败 和 错误 详细信息的 截图链接
 
 >Version 0.8.4 -- Gelomen
@@ -47,7 +48,7 @@
 >* Fix missing scroll bars in detail log (Podi).
 
 ## 步骤
-### 一、报告文档需截图
+### 一、UI自动化测试（报告文档需截图）
 #### 1. 初始化
 unittest框架，`setup()` 初始化 `DirAndFiles()`
 ```python
@@ -114,7 +115,7 @@ if __name__ == "__main__":
 ```
 
 -----
-### 二、报告文档不用截图
+### 二、非UI自动化测试（报告文档不用截图）
 #### 1. 初始化
 无需初始化
 
