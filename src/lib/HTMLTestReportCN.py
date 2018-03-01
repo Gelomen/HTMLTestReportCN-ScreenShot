@@ -238,7 +238,7 @@ class Template_mixin(object):
 
 // 修改 失败 和 错误 用例里对应按钮的颜色ClassName为动态加载 -- Gelomen
 $(function(){
-    	$("button").each(function (value) {
+    	$("button").each(function () {
     	    var text = $(this).text();
     	    if(text == "失败"){
     	        $(this).addClass("btn-danger")
