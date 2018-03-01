@@ -7,46 +7,44 @@
 > * [boafantasy](https://github.com/boafantasy) 大神原版：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
-```
-Version 0.9.1 -- Gelomen
-* 使用UI自动化测试时，增加 错误、失败 详细信息的 浏览器类型和版本
+>Version 0.9.1 -- Gelomen
+>* 使用UI自动化测试时，增加 错误、失败 详细信息的 浏览器类型和版本
 
-Version 0.9.0 -- Gelomen
-* 增加 失败 和 错误 详细信息的 截图链接
+>Version 0.9.0 -- Gelomen
+>* 增加 失败 和 错误 详细信息的 截图链接
 
-Version 0.8.4 -- Gelomen
-* 删除 失败模块 的显示
+>Version 0.8.4 -- Gelomen
+>* 删除 失败模块 的显示
 
-Version 0.8.3 -- Gelomen
-* 修复 测试结果 的筛选
-* 优化 失败、错误 小图标的颜色
-* 增加表格 最后一列 的显示，以美化表格
+>Version 0.8.3 -- Gelomen
+>* 修复 测试结果 的筛选
+>* 优化 失败、错误 小图标的颜色
+>* 增加表格 最后一列 的显示，以美化表格
 
-Version 0.8.2.1 -Findyou
-* 改为支持python3
+>Version 0.8.2.1 -Findyou
+>* 改为支持python3
 
-Version 0.8.2.1 -Findyou
-* 支持中文，汉化
-* 调整样式，美化（需要连入网络，使用的百度的Bootstrap.js）
-* 增加 通过分类显示、测试人员、通过率的展示
-* 优化“详细”与“收起”状态的变换
-* 增加返回顶部的锚点
+>Version 0.8.2.1 -Findyou
+>* 支持中文，汉化
+>* 调整样式，美化（需要连入网络，使用的百度的Bootstrap.js）
+>* 增加 通过分类显示、测试人员、通过率的展示
+>* 优化“详细”与“收起”状态的变换
+>* 增加返回顶部的锚点
 
-Version 0.8.2
-* Show output inline instead of popup window (Viorel Lupu).
+>Version 0.8.2
+>* Show output inline instead of popup window (Viorel Lupu).
 
-Version in 0.8.1
-* Validated XHTML (Wolfgang Borgert).
-* Added description of test classes and test cases.
+>Version in 0.8.1
+>* Validated XHTML (Wolfgang Borgert).
+>* Added description of test classes and test cases.
 
-Version in 0.8.0
-* Define Template_mixin class for customization.
-* Workaround a IE 6 bug that it does not treat \<script\> block as CDATA.
+>Version in 0.8.0
+>* Define Template_mixin class for customization.
+>* Workaround a IE 6 bug that it does not treat \<script\> block as CDATA.
 
-Version in 0.7.1
-* Back port to Python 2.3 (Frank Horowitz).
-* Fix missing scroll bars in detail log (Podi).
-```
+>Version in 0.7.1
+>* Back port to Python 2.3 (Frank Horowitz).
+>* Fix missing scroll bars in detail log (Podi).
 
 ## 步骤
 ### 一、报告文档需截图
