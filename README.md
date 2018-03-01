@@ -7,6 +7,12 @@
 > * [boafantasy](https://github.com/boafantasy) 大神原版：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+>Version 0.9.3 -- Gelomen
+>* 修复点击失败或错误按钮后，浏览器版本和截图的列不会隐藏的bug
+
+>Version 0.9.2 -- Gelomen
+>* 美化 浏览器版本 和 截图 的显示
+
 >Version 0.9.1 -- Gelomen
 >* 使用UI自动化测试时，增加 错误、失败 详细信息的 浏览器类型和版本
 
