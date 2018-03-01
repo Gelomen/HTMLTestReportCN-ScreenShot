@@ -10,7 +10,7 @@
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     
 <style type="text/css" media="screen">
-body        { font-family: Microsoft YaHei,Tahoma,arial,helvetica,sans-serif;padding: 20px; font-size: 80%; }
+body        { font-family: Microsoft YaHei;padding: 20px; font-size: 100%; }
 table       { font-size: 100%; }
 
 /* -- heading ---------------------------------------------------------------------- */
@@ -31,6 +31,10 @@ table       { font-size: 100%; }
 .errorCase  { color: #f0ad4e; font-weight: bold; }
 .hiddenRow  { display: none; }
 .testcase   { margin-left: 2em; }
+.screenshot:link { text-decoration: none;color: deeppink; }
+.screenshot:visited { text-decoration: none;color: deeppink; }
+.screenshot:hover { text-decoration: none;color: darkcyan; }
+.screenshot:active { text-decoration: none;color: deeppink; }
 </style>
 
 </head>
@@ -136,8 +140,8 @@ function html_escape(s) {
 <div class='heading'>
 <h1 style="font-family: Microsoft YaHei">Test Report</h1>
 <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-03-01 13:04:50</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:22.026702</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-03-01 14:47:01</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:20.737316</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
 
 <p class='description'>测试报告</p>
@@ -177,7 +181,7 @@ function html_escape(s) {
     <td class="text-center">1</td>
     <td class="text-center">1</td>
     <td class="text-center">0</td>
-    <td class="text-center">22.03秒</td>
+    <td class="text-center">20.74秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>详细</a></td>
 </tr>
 
@@ -213,7 +217,7 @@ AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
     </pre>
     </div>
     </td>
-    <td class="text-center" style="vertical-align: middle">浏览器版本：chrome(64.0.3282.186)</br></br><a href="1.png" target="_blank">截图_1.png</a></td>
+    <td class="text-center" style="vertical-align: middle">浏览器版本：<div style="color: brown;">chrome(64.0.3282.186)</div></br>截图：<a class="screenshot" href="1.png" target="_blank">img_1.png</a></td>
 </tr>
 
 <tr id='total_row' class="text-center active">
@@ -222,7 +226,7 @@ AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
     <td>1</td>
     <td>1</td>
     <td>0</td>
-    <td>22.03秒</td>
+    <td>20.74秒</td>
     <td>通过率：50.00%</td>
 </tr>
 </table>
