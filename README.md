@@ -7,6 +7,9 @@
 > * [boafantasy](https://github.com/boafantasy) 大神原版：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+>Version 0.9.4 -- Gelomen
+>* 修复失败和错误用例里对应按钮的颜色
+
 >Version 0.9.3 -- Gelomen
 >* 修复点击失败或错误按钮后，浏览器版本和截图的列不会隐藏的bug
 

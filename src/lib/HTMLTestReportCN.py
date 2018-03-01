@@ -67,11 +67,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
 __author__ = "Wai Yip Tung,  Findyou,  Gelomen"
-__version__ = "0.9.3"
+__version__ = "0.9.4"
 
 
 """
 Change History
+Version 0.9.4 -- Gelomen
+* 修复失败和错误用例里对应按钮的颜色
+
 Version 0.9.3 -- Gelomen
 * 修复点击失败或错误按钮后，浏览器版本和截图的列不会隐藏的bug
 
@@ -232,6 +235,20 @@ class Template_mixin(object):
 </head>
 <body >
 <script language="javascript" type="text/javascript">
+
+// 修改 失败 和 错误 用例里对应按钮的颜色ClassName为动态加载 -- Gelomen
+$(function(){
+    	$("button").each(function (value) {
+    	    var text = $(this).text();
+    	    if(text == "失败"){
+    	        $(this).addClass("btn-danger")
+            }else if(text == "错误") {
+                $(this).addClass("btn-warning")
+            }
+        })
+
+    })
+    
 output_list = Array();
 
 /*level 调整增加只显示通过用例的分类 --Findyou / 修复筛选显示bug --Gelomen
@@ -450,11 +467,11 @@ table       { font-size: 100%; }
     <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(desc)s</div></td>
     <td colspan='5' align='center'>
     <!--默认收起错误信息 -Findyou
-    <button id='btn_%(tid)s' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_%(tid)s'>%(status)s</button>
+    <button id='btn_%(tid)s' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_%(tid)s'>%(status)s</button>
     <div id='div_%(tid)s' class="collapse">  -->
 
     <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
-    <button id='btn_%(tid)s' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_%(tid)s,#div_%(tid)s_screenshot'>%(status)s</button>
+    <button id='btn_%(tid)s' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_%(tid)s,#div_%(tid)s_screenshot'>%(status)s</button>
     <div id='div_%(tid)s' class="collapse in">
     <pre style="text-align:left">
     %(script)s
@@ -471,11 +488,11 @@ table       { font-size: 100%; }
         <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(desc)s</div></td>
         <td colspan='5' align='center'>
         <!--默认收起错误信息 -Findyou
-        <button id='btn_%(tid)s' type="button"  class="btn btn-danger btn-xs collapsed" data-toggle="collapse" data-target='#div_%(tid)s'>%(status)s</button>
+        <button id='btn_%(tid)s' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_%(tid)s'>%(status)s</button>
         <div id='div_%(tid)s' class="collapse">  -->
 
         <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
-        <button id='btn_%(tid)s' type="button"  class="btn btn-danger btn-xs" data-toggle="collapse" data-target='#div_%(tid)s'>%(status)s</button>
+        <button id='btn_%(tid)s' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_%(tid)s'>%(status)s</button>
         <div id='div_%(tid)s' class="collapse in">
         <pre style="text-align:left">
         %(script)s
