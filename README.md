@@ -7,6 +7,7 @@
 > * [boafantasy](https://github.com/boafantasy) 大神原版：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+```
 Version 0.9.1 -- Gelomen
 * 使用UI自动化测试时，增加 错误、失败 详细信息的 浏览器类型和版本
 
@@ -45,7 +46,7 @@ Version in 0.8.0
 Version in 0.7.1
 * Back port to Python 2.3 (Frank Horowitz).
 * Fix missing scroll bars in detail log (Podi).
-
+```
 
 ## 步骤
 ### 一、报告文档需截图
