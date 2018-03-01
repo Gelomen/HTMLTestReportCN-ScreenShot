@@ -66,7 +66,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: http://tungwaiyip.info/software/HTMLTestRunner.html
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
-__author__ = "Wai Yip Tung,  Findyou, Gelomen"
+__author__ = "Wai Yip Tung,  Findyou,  Gelomen"
 __version__ = "0.9.1"
 
 
