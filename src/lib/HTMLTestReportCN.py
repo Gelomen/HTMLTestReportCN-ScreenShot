@@ -556,6 +556,11 @@ class _TestResult(TestResult):
         # 增加一个测试通过率 --Findyou
         self.passrate = float(0)
 
+        # 增加失败用例合集
+        self.failCase = ""
+        # 增加错误用例合集
+        self.errorCase = ""
+
     def startTest(self, test):
         stream = sys.stderr
         # stdout_content = " Testing: " + str(test)
@@ -599,11 +604,11 @@ class _TestResult(TestResult):
         use_time = round(self.test_end_time - self.test_start_time, 2)
         self.result.append((0, test, output, '', use_time))
         if self.verbosity > 1:
-            sys.stderr.write('  S ')
+            sys.stderr.write('  S  ')
             sys.stderr.write(str(test))
             sys.stderr.write('\n')
         else:
-            sys.stderr.write('  S ')
+            sys.stderr.write('  S  ')
             sys.stderr.write('\n')
 
     def addError(self, test, err):
@@ -621,6 +626,11 @@ class _TestResult(TestResult):
             sys.stderr.write('  E  ')
             sys.stderr.write('\n')
 
+        if len(self.errorCase) > 0:
+            self.errorCase += "<br>" + str(test)
+        else:
+            self.errorCase += str(test)
+
     def addFailure(self, test, err):
         self.failure_count += 1
         TestResult.addFailure(self, test, err)
@@ -635,6 +645,11 @@ class _TestResult(TestResult):
         else:
             sys.stderr.write('  F  ')
             sys.stderr.write('\n')
+
+        if len(self.failCase) > 0:
+            self.failCase += "<br>" + str(test)
+        else:
+            self.failCase += str(test)
 
 
 # 新增 need_screenshot 参数，0为无需截图，1为需要截图  -- Gelomen
@@ -709,11 +724,23 @@ class HTMLTestRunner(Template_mixin):
         else:
             status = 'none'
 
+        if len(result.failCase) > 0:
+            failCase = result.failCase
+        else:
+            failCase = "无"
+
+        if len(result.errorCase) > 0:
+            errorCase = result.errorCase
+        else:
+            errorCase = "无"
+
         return [
             ('测试人员', self.tester),
             ('开始时间', startTime),
             ('合计耗时', duration),
-            ('测试结果', status + "，通过率 = " + self.passrate)
+            ('测试结果', status + "，通过率 = " + self.passrate),
+            ('失败用例合集', failCase),
+            ('错误用例合集', errorCase),
         ]
 
     def generateReport(self, test, result):
@@ -740,9 +767,15 @@ class HTMLTestRunner(Template_mixin):
     def _generate_heading(self, report_attrs):
         a_lines = []
         for name, value in report_attrs:
-            line = self.HEADING_ATTRIBUTE_TMPL % dict(
-                name=saxutils.escape(name),
-                value=saxutils.escape(value),
+            if name == "失败用例合集" or name == "错误用例合集":
+                line = self.HEADING_ATTRIBUTE_TMPL % dict(
+                    name=name,
+                    value="<div style='width:150px;'>" + value + "</div>",
+                    )
+            else:
+                line = self.HEADING_ATTRIBUTE_TMPL % dict(
+                    name=saxutils.escape(name),
+                    value=saxutils.escape(value),
                 )
             a_lines.append(line)
         heading = self.HEADING_TMPL % dict(
