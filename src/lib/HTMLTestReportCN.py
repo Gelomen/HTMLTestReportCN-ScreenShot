@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 """
 A TestRunner for use with the Python unit testing framework. It
 generates a HTML report to show the result at a glance.
@@ -118,12 +118,10 @@ Version in 0.7.1
 
 import datetime
 import io
-import sys
 import time
 import unittest
 from xml.sax import saxutils
 import sys
-import re
 import os
 
 # ------------------------------------------------------------------------
@@ -137,8 +135,10 @@ import os
 #   >>> logging.basicConfig(stream=HTMLTestRunner.stdout_redirector)
 #   >>>
 
+
 class OutputRedirector(object):
     """ Wrapper to redirect stdout or stderr """
+
     def __init__(self, fp):
         self.fp = fp
 
@@ -151,11 +151,13 @@ class OutputRedirector(object):
     def flush(self):
         self.fp.flush()
 
+
 stdout_redirector = OutputRedirector(sys.stdout)
 stderr_redirector = OutputRedirector(sys.stderr)
 
 # ----------------------------------------------------------------------
 # Template
+
 
 class Template_mixin(object):
     """
@@ -198,14 +200,14 @@ class Template_mixin(object):
     """
 
     STATUS = {
-    0: '通过',
-    1: '失败',
-    2: '错误',
+        0: '通过',
+        1: '失败',
+        2: '错误',
     }
 
     DEFAULT_TITLE = '测试报告'
     DEFAULT_DESCRIPTION = ''
-    DEFAULT_TESTER='QA'
+    DEFAULT_TESTER = 'QA'
 
     # ------------------------------------------------------------------------
     # HTML Template
@@ -330,7 +332,6 @@ function html_escape(s) {
 """
     # variables: (title, generator, stylesheet, heading, report, ending)
 
-
     # ------------------------------------------------------------------------
     # Stylesheet
     #
@@ -373,12 +374,10 @@ table       { font-size: 100%; }
 <p class='description'>%(description)s</p>
 </div>
 
-""" # variables: (title, parameters, description)
+"""  # variables: (title, parameters, description)
 
     HEADING_ATTRIBUTE_TMPL = """<p class='attribute'><strong>%(name)s : </strong> %(value)s</p>
-""" # variables: (name, value)
-
-
+"""  # variables: (name, value)
 
     # ------------------------------------------------------------------------
     # Report
@@ -421,7 +420,7 @@ table       { font-size: 100%; }
     <td>通过率：%(passrate)s</td>
 </tr>
 </table>
-""" # variables: (test_list, count, Pass, fail, error ,passrate)
+"""  # variables: (test_list, count, Pass, fail, error ,passrate)
 
     REPORT_CLASS_TMPL = r"""
 <tr class='%(style)s warning'>
@@ -433,9 +432,9 @@ table       { font-size: 100%; }
     <td class="text-center">%(time_usage)s</td>
     <td class="text-center"><a href="javascript:showClassDetail('%(cid)s',%(count)s)" class="detail" id='%(cid)s'>详细</a></td>
 </tr>
-""" # variables: (style, desc, count, Pass, fail, error, cid)
+"""  # variables: (style, desc, count, Pass, fail, error, cid)
 
-    #失败 的样式，去掉原来JS效果，美化展示效果  -Findyou / 美化类名上下居中，有截图列 -- Gelomen
+    # 失败 的样式，去掉原来JS效果，美化展示效果  -Findyou / 美化类名上下居中，有截图列 -- Gelomen
     REPORT_TEST_WITH_OUTPUT_TMPL_1 = r"""
 <tr id='%(tid)s' class='%(Class)s'>
     <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(desc)s</div></td>
@@ -454,7 +453,7 @@ table       { font-size: 100%; }
     </td>
     <td class="text-center" style="vertical-align: middle">浏览器版本：%(browser)s</br></br><a href="%(screenshot)s" target="_blank">截图_%(screenshot)s</a></td>
 </tr>
-""" # variables: (tid, Class, style, desc, status)
+"""  # variables: (tid, Class, style, desc, status)
 
     # 失败 的样式，去掉原来JS效果，美化展示效果  -Findyou / 美化类名上下居中，无截图列 -- Gelomen
     REPORT_TEST_WITH_OUTPUT_TMPL_0 = r"""
@@ -484,11 +483,11 @@ table       { font-size: 100%; }
     <td colspan='5' align='center'><span class="label label-success success">%(status)s</span></td>
     <td class='%(style)s' style="vertical-align: middle"></td>
 </tr>
-""" # variables: (tid, Class, style, desc, status)
+"""  # variables: (tid, Class, style, desc, status)
 
     REPORT_TEST_OUTPUT_TMPL = r"""
 %(id)s: %(output)s
-""" # variables: (id, output)
+"""  # variables: (id, output)
 
     # ------------------------------------------------------------------------
     # ENDING
@@ -504,6 +503,7 @@ table       { font-size: 100%; }
 
 
 TestResult = unittest.TestResult
+
 
 class _TestResult(TestResult):
     # note: _TestResult is a pure representation of results.
@@ -526,9 +526,8 @@ class _TestResult(TestResult):
         #   stack trace,
         # )
         self.result = []
-        #增加一个测试通过率 --Findyou
-        self.passrate=float(0)
-
+        # 增加一个测试通过率 --Findyou
+        self.passrate = float(0)
 
     def startTest(self, test):
         stream = sys.stderr
@@ -560,13 +559,11 @@ class _TestResult(TestResult):
             self.stderr0 = None
         return self.outputBuffer.getvalue()
 
-
     def stopTest(self, test):
         # Usually one of addSuccess, addError or addFailure would have been called.
         # But there are some path in unittest that would bypass this.
         # We must disconnect stdout in stopTest(), which is guaranteed to be called.
         self.complete_output()
-
 
     def addSuccess(self, test):
         self.success_count += 1
@@ -617,7 +614,8 @@ class _TestResult(TestResult):
 class HTMLTestRunner(Template_mixin):
     """
     """
-    def __init__(self, stream=sys.stdout, verbosity=2, need_screenshot=None,title=None,description=None,tester=None):
+
+    def __init__(self, stream=sys.stdout, verbosity=2, need_screenshot=None, title=None, description=None, tester=None):
         self.need_screenshot = need_screenshot
         self.stream = stream
         self.verbosity = verbosity
@@ -636,7 +634,6 @@ class HTMLTestRunner(Template_mixin):
 
         self.startTime = datetime.datetime.now()
 
-
     def run(self, test):
         "Run the given test case or test suite."
         result = _TestResult(self.verbosity)  # verbosity为1,只输出成功与否，为2会输出用例名称
@@ -645,25 +642,24 @@ class HTMLTestRunner(Template_mixin):
         self.generateReport(test, result)
         print("\033[36;0m--------------------- 测试结束 ---------------------\033[0m")
         print()
-        print('\033[36;0m------------- 合计耗时: %s -------------\033[0m' % (self.stopTime-self.startTime), file=sys.stderr)
+        print('\033[36;0m------------- 合计耗时: %s -------------\033[0m' % (self.stopTime - self.startTime), file=sys.stderr)
         return result
-
 
     def sortResult(self, result_list):
         # unittest does not seems to run in any particular order.
         # Here at least we want to group them together by class.
         rmap = {}
         classes = []
-        for n,t,o,e,s in result_list:
+        for n, t, o, e, s in result_list:
             cls = t.__class__
             if cls not in rmap:
                 rmap[cls] = []
                 classes.append(cls)
-            rmap[cls].append((n,t,o,e,s))
+            rmap[cls].append((n, t, o, e, s))
         r = [(cls, rmap[cls]) for cls in classes]
         return r
 
-    #替换测试结果status为通过率 --Findyou
+    # 替换测试结果status为通过率 --Findyou
     def getReportAttributes(self, result):
         """
         Return report attributes as a list of (name, value).
@@ -673,9 +669,12 @@ class HTMLTestRunner(Template_mixin):
         duration = str(self.stopTime - self.startTime)
         status = []
         status.append('共 %s' % (result.success_count + result.failure_count + result.error_count))
-        if result.success_count: status.append('通过 %s'    % result.success_count)
-        if result.failure_count: status.append('失败 %s' % result.failure_count)
-        if result.error_count:   status.append('错误 %s'   % result.error_count  )
+        if result.success_count:
+            status.append('通过 %s' % result.success_count)
+        if result.failure_count:
+            status.append('失败 %s' % result.failure_count)
+        if result.error_count:
+            status.append('错误 %s' % result.error_count)
         if status:
             status = '，'.join(status)
             if (result.success_count + result.failure_count + result.error_count) > 0:
@@ -687,9 +686,9 @@ class HTMLTestRunner(Template_mixin):
 
         return [
             ('测试人员', self.tester),
-            ('开始时间',startTime),
-            ('合计耗时',duration),
-            ('测试结果',status + "，通过率 = "+self.passrate)
+            ('开始时间', startTime),
+            ('合计耗时', duration),
+            ('测试结果', status + "，通过率 = " + self.passrate)
         ]
 
     def generateReport(self, test, result):
@@ -700,37 +699,36 @@ class HTMLTestRunner(Template_mixin):
         report = self._generate_report(result)
         ending = self._generate_ending()
         output = self.HTML_TMPL % dict(
-            title = saxutils.escape(self.title),
-            generator = generator,
-            stylesheet = stylesheet,
-            heading = heading,
-            report = report,
-            ending = ending,
+            title=saxutils.escape(self.title),
+            generator=generator,
+            stylesheet=stylesheet,
+            heading=heading,
+            report=report,
+            ending=ending,
         )
         self.stream.write(output.encode('utf8'))
-
 
     def _generate_stylesheet(self):
         return self.STYLESHEET_TMPL
 
-    #增加Tester显示 -Findyou
+    # 增加Tester显示 -Findyou
     def _generate_heading(self, report_attrs):
         a_lines = []
         for name, value in report_attrs:
             line = self.HEADING_ATTRIBUTE_TMPL % dict(
-                    name = saxutils.escape(name),
-                    value = saxutils.escape(value),
+                name=saxutils.escape(name),
+                value=saxutils.escape(value),
                 )
             a_lines.append(line)
         heading = self.HEADING_TMPL % dict(
-            title = saxutils.escape(self.title),
-            parameters = ''.join(a_lines),
-            description = saxutils.escape(self.description),
-            tester= saxutils.escape(self.tester),
+            title=saxutils.escape(self.title),
+            parameters=''.join(a_lines),
+            description=saxutils.escape(self.description),
+            tester=saxutils.escape(self.tester),
         )
         return heading
 
-    #生成报告  --Findyou添加注释
+    # 生成报告  --Findyou添加注释
     def _generate_report(self, result):
         rows = []
         sortedResult = self.sortResult(result.result)
@@ -739,10 +737,13 @@ class HTMLTestRunner(Template_mixin):
         for cid, (cls, cls_results) in enumerate(sortedResult):
             # subtotal for a class
             np = nf = ne = ns = 0
-            for n,t,o,e,s in cls_results:
-                if n == 0: np += 1
-                elif n == 1: nf += 1
-                elif n == 2: ne += 1
+            for n, t, o, e, s in cls_results:
+                if n == 0:
+                    np += 1
+                elif n == 1:
+                    nf += 1
+                elif n == 2:
+                    ne += 1
                 ns += s  # 把单个class用例文件里面的多个def用例每次的耗时相加
             ns = round(ns, 2)
             sum_ns += ns  # 把所有用例的每次耗时相加
@@ -755,31 +756,30 @@ class HTMLTestRunner(Template_mixin):
             desc = doc and '%s: %s' % (name, doc) or name
 
             row = self.REPORT_CLASS_TMPL % dict(
-                style = ne > 0 and 'errorClass' or nf > 0 and 'failClass' or 'passClass',
-                desc = desc,
-                count = np+nf+ne,
-                Pass = np,
-                fail = nf,
-                error = ne,
-                cid = 'c%s' % (cid+1),
+                style=ne > 0 and 'errorClass' or nf > 0 and 'failClass' or 'passClass',
+                desc=desc,
+                count=np + nf + ne,
+                Pass=np,
+                fail=nf,
+                error=ne,
+                cid='c%s' % (cid + 1),
                 time_usage=str(ns) + "秒"  # 单个用例耗时
             )
             rows.append(row)
 
-            for tid, (n,t,o,e,s) in enumerate(cls_results):
+            for tid, (n, t, o, e, s) in enumerate(cls_results):
                 self._generate_report_test(rows, cid, tid, n, t, o, e)
         sum_ns = round(sum_ns, 2)
         report = self.REPORT_TMPL % dict(
-            test_list = ''.join(rows),
-            count = str(result.success_count+result.failure_count+result.error_count),
-            Pass = str(result.success_count),
-            fail = str(result.failure_count),
-            error = str(result.error_count),
+            test_list=''.join(rows),
+            count=str(result.success_count + result.failure_count + result.error_count),
+            Pass=str(result.success_count),
+            fail=str(result.failure_count),
+            error=str(result.error_count),
             time_usage=str(sum_ns) + "秒",  # 所有用例耗时
-            passrate =self.passrate,
+            passrate=self.passrate,
         )
         return report
-
 
     def _generate_report_test(self, rows, cid, tid, n, t, o, e):
         # e.g. 'pt1_1', 'ft1_1', 'et1_1'etc
@@ -791,7 +791,7 @@ class HTMLTestRunner(Template_mixin):
             tid_flag = 'f'
         elif n == 2:
             tid_flag = 'e'
-        tid = tid_flag + 't%s_%s' % (cid+1, tid+1)
+        tid = tid_flag + 't%s_%s' % (cid + 1, tid + 1)
         name = t.id().split('.')[-1]
         doc = t.shortDescription() or ""
         desc = doc and ('%s: %s' % (name, doc)) or name
@@ -801,7 +801,7 @@ class HTMLTestRunner(Template_mixin):
             tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_0 or self.REPORT_TEST_NO_OUTPUT_TMPL
 
         # utf-8 支持中文 - Findyou
-         # o and e should be byte string because they are collected from stdout and stderr?
+        # o and e should be byte string because they are collected from stdout and stderr?
         if isinstance(o, str):
             # TODO: some problem with 'string_escape': it escape \n and mess up formating
             # uo = unicode(o.encode('string_escape'))
@@ -818,8 +818,8 @@ class HTMLTestRunner(Template_mixin):
             ue = e
 
         script = self.REPORT_TEST_OUTPUT_TMPL % dict(
-            id = tid,
-            output = saxutils.escape(uo+ue),
+            id=tid,
+            output=saxutils.escape(uo + ue),
         )
 
         if self.need_screenshot >= 1:
@@ -919,6 +919,7 @@ class TestProgram(unittest.TestProgram):
     A variation of the unittest.TestProgram. Please refer to the base
     class for command line parameters.
     """
+
     def runTests(self):
         # Pick HTMLTestRunner as the default test runner.
         # base class's testRunner parameter is not useful because it means
@@ -926,6 +927,7 @@ class TestProgram(unittest.TestProgram):
         if self.testRunner is None:
             self.testRunner = HTMLTestRunner(verbosity=self.verbosity)
         unittest.TestProgram.runTests(self)
+
 
 main = TestProgram
 
