@@ -7,6 +7,9 @@
 > * [boafantasy](https://github.com/boafantasy) 大神原版：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+Version 0.9.7 -- Gelomen
+* 优化截图显示，滚动页面会固定居中
+
 Version 0.9.6 -- Gelomen
 * 新增打开图片的特效，可以直接在当前页面看截图
 

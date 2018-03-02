@@ -67,11 +67,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
 __author__ = "Wai Yip Tung,  Findyou,  Gelomen"
-__version__ = "0.9.6"
+__version__ = "0.9.7"
 
 
 """
 Change History
+Version 0.9.7 -- Gelomen
+* 优化截图显示，滚动页面会固定居中
+
 Version 0.9.6 -- Gelomen
 * 新增打开图片的特效，可以直接在当前页面看截图
 
@@ -265,11 +268,10 @@ class Template_mixin(object):
             $('.pic_looper').fadeIn(500);
             $('.pic_show').fadeIn(500);
 
-            var top = $(window).scrollTop();
             var browserHeight = $(window).height();
             var pic_boxHeight = $(".pic_box").height();
-            var addtop = (browserHeight - pic_boxHeight)/2;
-            $('.pic_box').css("margin-top",top + addtop + "px")
+            var top = (browserHeight - pic_boxHeight)/2;
+            $('.pic_box').css("margin-top", top + "px")
 
         });
         $('.pic_looper, .pic_show').click(function(){
@@ -432,7 +434,7 @@ table       { font-size: 100%; }
 
 .pic_show{
     width:100%;
-    position:absolute;
+    position:fixed;
     left:0;
     top:0;
     right:0;

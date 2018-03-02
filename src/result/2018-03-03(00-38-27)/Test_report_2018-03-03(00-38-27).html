@@ -49,7 +49,7 @@ table       { font-size: 100%; }
 
 .pic_show{
     width:100%;
-    position:absolute;
+    position:fixed;
     left:0;
     top:0;
     right:0;
@@ -62,14 +62,13 @@ table       { font-size: 100%; }
 .pic_box{
     width:80%;
     height:80%;
-    max-width:1020px;
     margin:40px auto;
     text-align: center;
     overflow: hidden;
 }
 
 .pic_box img{
-    height:100%;
+    max-width:1020px;
 }
 
 /* -- report ------------------------------------------------------------------------ */
@@ -112,11 +111,10 @@ table       { font-size: 100%; }
             $('.pic_looper').fadeIn(500);
             $('.pic_show').fadeIn(500);
 
-            var top = $(window).scrollTop();
             var browserHeight = $(window).height();
             var pic_boxHeight = $(".pic_box").height();
-            var addtop = (browserHeight - pic_boxHeight)/2;
-            $('.pic_box').css("margin-top",top + addtop + "px")
+            var top = (browserHeight - pic_boxHeight)/2;
+            $('.pic_box').css("margin-top", top + "px")
 
         });
         $('.pic_looper, .pic_show').click(function(){
@@ -227,7 +225,7 @@ function html_escape(s) {
 <div class='heading'>
 <h1 style="font-family: Microsoft YaHei">Test Report</h1>
 <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-03-02 23:53:46</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-03-03 00:38:29</p>
 <p class='attribute'><strong>合计耗时 : </strong> 0:00:00</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
 <p class='attribute'><strong>失败用例合集 : </strong> <ol style='float: left; margin-right: 100px;'><li>test2 (Test.TestClass)</li></ol></p>
