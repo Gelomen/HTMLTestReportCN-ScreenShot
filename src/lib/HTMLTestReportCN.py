@@ -67,11 +67,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
 __author__ = "Wai Yip Tung,  Findyou,  Gelomen"
-__version__ = "0.9.4"
+__version__ = "0.9.5"
 
 
 """
 Change History
+Version 0.9.5 -- Gelomen
+* heading新增 失败 和 错误 测试用例合集
+
 Version 0.9.4 -- Gelomen
 * 修复失败和错误用例里对应按钮的颜色
 
@@ -236,8 +239,8 @@ class Template_mixin(object):
 <body >
 <script language="javascript" type="text/javascript">
 
-// 修改 失败 和 错误 用例里对应按钮的颜色ClassName为动态加载 -- Gelomen
-$(function(){
+    $(function(){
+        // 修改 失败 和 错误 用例里对应按钮的颜色ClassName为动态加载 -- Gelomen
     	$("button").each(function () {
     	    var text = $(this).text();
     	    if(text == "失败"){
@@ -247,7 +250,12 @@ $(function(){
             }
         })
 
+        // 给失败和错误合集加样式 -- Gelomen
+        var p_attribute = $("p.attribute")
+        p_attribute.eq(4).addClass("failCollection")
+        p_attribute.eq(5).addClass("errorCollection")
     })
+    
     
 output_list = Array();
 
@@ -375,6 +383,13 @@ table       { font-size: 100%; }
 .heading .description {
     margin-top: 4ex;
     margin-bottom: 6ex;
+    clear: both;
+}
+
+/* --- 失败和错误合集样式 -- Gelomen --- */
+.failCollection, .errorCollection {
+    width: 100px;
+    float: left;
 }
 
 /* -- report ------------------------------------------------------------------------ */
@@ -627,10 +642,7 @@ class _TestResult(TestResult):
             sys.stderr.write('\n')
 
         # 添加收集错误用例名字 -- Gelomen
-        if len(self.errorCase) > 0:
-            self.errorCase += "<br>" + str(test)
-        else:
-            self.errorCase += str(test)
+        self.errorCase += "<li>" + str(test) + "</li>"
 
     def addFailure(self, test, err):
         self.failure_count += 1
@@ -648,10 +660,7 @@ class _TestResult(TestResult):
             sys.stderr.write('\n')
 
         # 添加收集失败用例名字 -- Gelomen
-        if len(self.failCase) > 0:
-            self.failCase += "<br>" + str(test)
-        else:
-            self.failCase += str(test)
+        self.failCase += "<li>" + str(test) + "</li>"
 
 
 # 新增 need_screenshot 参数，0为无需截图，1为需要截图  -- Gelomen
@@ -684,6 +693,7 @@ class HTMLTestRunner(Template_mixin):
         test(result)
         self.stopTime = datetime.datetime.now()
         self.generateReport(test, result)
+        # 优化测试结束后打印蓝色提示文字 -- Gelomen
         print("\n\033[36;0m--------------------- 测试结束 ---------------------\n------------- 合计耗时: %s -------------\033[0m" % (self.stopTime - self.startTime), file=sys.stderr)
         return result
 
@@ -773,7 +783,7 @@ class HTMLTestRunner(Template_mixin):
             if name == "失败用例合集" or name == "错误用例合集":
                 line = self.HEADING_ATTRIBUTE_TMPL % dict(
                     name=name,
-                    value="<div style='width:150px;'>" + value + "</div>",
+                    value="<ol style='float: left; margin-right: 40px;'>" + value + "</ol>",
                     )
             else:
                 line = self.HEADING_ATTRIBUTE_TMPL % dict(

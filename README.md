@@ -7,6 +7,9 @@
 > * [boafantasy](https://github.com/boafantasy) 大神原版：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+Version 0.9.5 -- Gelomen
+* heading新增 失败 和 错误 测试用例合集
+
 Version 0.9.4 -- Gelomen
 * 修复失败和错误用例里对应按钮的颜色
 
