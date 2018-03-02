@@ -7,6 +7,9 @@
 > * [boafantasy](https://github.com/boafantasy) 大神原版：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+Version 0.9.6 -- Gelomen
+* 新增打开图片的特效，可以直接在当前页面看截图
+
 Version 0.9.5 -- Gelomen
 * heading新增 失败 和 错误 测试用例合集
 

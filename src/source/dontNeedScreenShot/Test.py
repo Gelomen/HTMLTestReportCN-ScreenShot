@@ -15,8 +15,6 @@ class TestClass(unittest.TestCase):
         pass
 
     def test1(self):
-        self.a = 1
-        self.b = 1
         try:
             self.assertNotEqual(self.a, self.b, "a == b!")
         except AssertionError:

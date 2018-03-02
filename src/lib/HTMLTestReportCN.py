@@ -67,11 +67,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
 __author__ = "Wai Yip Tung,  Findyou,  Gelomen"
-__version__ = "0.9.5"
+__version__ = "0.9.6"
 
 
 """
 Change History
+Version 0.9.6 -- Gelomen
+* 新增打开图片的特效，可以直接在当前页面看截图
+
 Version 0.9.5 -- Gelomen
 * heading新增 失败 和 错误 测试用例合集
 
@@ -248,13 +251,32 @@ class Template_mixin(object):
             }else if(text == "错误") {
                 $(this).addClass("btn-warning")
             }
-        })
+        });
 
         // 给失败和错误合集加样式 -- Gelomen
-        var p_attribute = $("p.attribute")
-        p_attribute.eq(4).addClass("failCollection")
-        p_attribute.eq(5).addClass("errorCollection")
-    })
+        var p_attribute = $("p.attribute");
+        p_attribute.eq(4).addClass("failCollection");
+        p_attribute.eq(5).addClass("errorCollection");
+
+        // 打开截图，放大，点击任何位置可以关闭图片  -- Gelomen
+        $(".screenshot").click(function(){
+            var img = $(this).attr("img");
+            $('.pic_show img').attr('src', img);
+            $('.pic_looper').fadeIn(500);
+            $('.pic_show').fadeIn(500);
+
+            var top = $(window).scrollTop();
+            var browserHeight = $(window).height();
+            var pic_boxHeight = $(".pic_box").height();
+            var addtop = (browserHeight - pic_boxHeight)/2;
+            $('.pic_box').css("margin-top",top + addtop + "px")
+
+        });
+        $('.pic_looper, .pic_show').click(function(){
+            $('.pic_looper').fadeOut(300);
+            $('.pic_show').fadeOut(300)
+        });
+    });
     
     
 output_list = Array();
@@ -392,6 +414,47 @@ table       { font-size: 100%; }
     float: left;
 }
 
+/* --- 打开截图特效样式 -- Gelomen --- */
+.data-img{
+    cursor:pointer
+}
+
+.pic_looper{
+    width:100%;
+    height:100%;
+    position: fixed;
+    left: 0;
+    top:0;
+    opacity: 0.5;
+    background: #000;
+    display: none;
+}
+
+.pic_show{
+    width:100%;
+    position:absolute;
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+    margin:auto;
+    text-align: center;
+    display: none;
+}
+
+.pic_box{
+    width:80%;
+    height:80%;
+    max-width:1020px;
+    margin:40px auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+.pic_box img{
+    height:100%;
+}
+
 /* -- report ------------------------------------------------------------------------ */
 #total_row  { font-weight: bold; }
 .passCase   { color: #5cb85c; }
@@ -410,7 +473,9 @@ table       { font-size: 100%; }
     # Heading
     #
 
-    HEADING_TMPL = """<div class='heading'>
+    # 添加显示截图的div  -- Gelomen
+    HEADING_TMPL = """<div class='pic_looper'></div> <div class='pic_show'><div class='pic_box'><img src=''/></div> </div>
+<div class='heading'>
 <h1 style="font-family: Microsoft YaHei">%(title)s</h1>
 %(parameters)s
 <p class='description'>%(description)s</p>
@@ -493,7 +558,7 @@ table       { font-size: 100%; }
     </pre>
     </div>
     </td>
-    <td class="text-center" style="vertical-align: middle"><div id='div_%(tid)s_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">%(browser)s</div></br>截图：<a class="screenshot" href="%(screenshot)s" target="_blank">img_%(screenshot)s</a></div></td>
+    <td class="text-center" style="vertical-align: middle"><div id='div_%(tid)s_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">%(browser)s</div></br>截图：<a class="screenshot" href="javascript:void(0)" img="%(screenshot)s">img_%(screenshot)s</a></div></td>
 </tr>
 """  # variables: (tid, Class, style, desc, status)
 
@@ -783,7 +848,7 @@ class HTMLTestRunner(Template_mixin):
             if name == "失败用例合集" or name == "错误用例合集":
                 line = self.HEADING_ATTRIBUTE_TMPL % dict(
                     name=name,
-                    value="<ol style='float: left; margin-right: 40px;'>" + value + "</ol>",
+                    value="<ol style='float: left; margin-right: 100px;'>" + value + "</ol>",
                     )
             else:
                 line = self.HEADING_ATTRIBUTE_TMPL % dict(
