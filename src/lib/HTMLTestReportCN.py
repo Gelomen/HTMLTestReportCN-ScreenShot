@@ -445,14 +445,13 @@ table       { font-size: 100%; }
 .pic_box{
     width:80%;
     height:80%;
-    max-width:1020px;
     margin:40px auto;
     text-align: center;
     overflow: hidden;
 }
 
 .pic_box img{
-    height:100%;
+    max-width:1020px;
 }
 
 /* -- report ------------------------------------------------------------------------ */
