@@ -282,10 +282,11 @@ class Template_mixin(object):
             $('.pic_show').fadeOut(200)
         });
 
-        // 距离顶部600时，回到顶部按钮才出现  -- Gelomen
+        // 距离顶部超过浏览器窗口一屏时，回到顶部按钮才出现  -- Gelomen
         $(window).scroll(function(){
+            var browserHeight = $(window).height();
             var top = $(window).scrollTop();
-            if(top >= 600){
+            if(top >= browserHeight){
                 $("#toTop").css("display", "block")
             }else {
                 $("#toTop").css("display", "none")
