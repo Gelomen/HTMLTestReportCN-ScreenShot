@@ -7,6 +7,9 @@
 > * [boafantasy](https://github.com/boafantasy) 大神原版：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+Version 0.9.8 -- Gelomen
+* 优化回到顶部按钮的显示方式
+
 Version 0.9.7 -- Gelomen
 * 优化截图显示，滚动页面会固定居中
 

@@ -67,11 +67,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
 __author__ = "Wai Yip Tung,  Findyou,  Gelomen"
-__version__ = "0.9.7"
+__version__ = "0.9.8"
 
 
 """
 Change History
+Version 0.9.8 -- Gelomen
+* 优化回到顶部按钮的显示方式
+
 Version 0.9.7 -- Gelomen
 * 优化截图显示，滚动页面会固定居中
 
@@ -278,6 +281,16 @@ class Template_mixin(object):
             $('.pic_looper').fadeOut(200);
             $('.pic_show').fadeOut(200)
         });
+
+        // 距离顶部600时，回到顶部按钮才出现  -- Gelomen
+        $(window).scroll(function(){
+            var top = $(window).scrollTop();
+            if(top >= 600){
+                $("#toTop").css("display", "block")
+            }else {
+                $("#toTop").css("display", "none")
+            }
+        })
     });
     
     
@@ -602,7 +615,7 @@ table       { font-size: 100%; }
     #
     # 增加返回顶部按钮  --Findyou
     ENDING_TMPL = """<div id='ending'>&nbsp;</div>
-    <div style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer">
+    <div id="toTop" style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer; display: none">
     <a href="#"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
     </span></a></div>
     """
