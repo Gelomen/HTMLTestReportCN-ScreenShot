@@ -265,8 +265,8 @@ class Template_mixin(object):
         $(".screenshot").click(function(){
             var img = $(this).attr("img");
             $('.pic_show img').attr('src', img);
-            $('.pic_looper').fadeIn(500);
-            $('.pic_show').fadeIn(500);
+            $('.pic_looper').fadeIn(200);
+            $('.pic_show').fadeIn(200);
 
             var browserHeight = $(window).height();
             var pic_boxHeight = $(".pic_box").height();
@@ -275,8 +275,8 @@ class Template_mixin(object):
 
         });
         $('.pic_looper, .pic_show').click(function(){
-            $('.pic_looper').fadeOut(300);
-            $('.pic_show').fadeOut(300)
+            $('.pic_looper').fadeOut(200);
+            $('.pic_show').fadeOut(200)
         });
     });
     
@@ -427,7 +427,7 @@ table       { font-size: 100%; }
     position: fixed;
     left: 0;
     top:0;
-    opacity: 0.5;
+    opacity: 0.6;
     background: #000;
     display: none;
 }
