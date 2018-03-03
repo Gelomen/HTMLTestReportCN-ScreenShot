@@ -622,7 +622,7 @@ table       { font-size: 100%; }
     # 增加返回顶部按钮  --Findyou
     ENDING_TMPL = """<div id='ending'>&nbsp;</div>
     <div id="toTop" style=" position:fixed;right:50px; bottom:30px; width:20px; height:20px;cursor:pointer; display: none">
-    <a href="javascript:void(0)"><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
+    <a><span class="glyphicon glyphicon-eject" style = "font-size:30px;" aria-hidden="true">
     </span></a></div>
     """
 
