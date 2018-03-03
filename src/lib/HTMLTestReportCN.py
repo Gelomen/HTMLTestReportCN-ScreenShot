@@ -292,6 +292,11 @@ class Template_mixin(object):
                 $("#toTop").css("display", "none")
             }
         })
+        
+        // 增加回到顶部过程的动画，以看上去不会那么生硬  -- Gelomen
+        $("#toTop").click(function() {
+            $("html,body").animate({"scrollTop":0}, 700)
+        })
     });
     
     
