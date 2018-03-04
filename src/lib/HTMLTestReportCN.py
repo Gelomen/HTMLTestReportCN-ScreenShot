@@ -281,6 +281,14 @@ class Template_mixin(object):
             $('.pic_looper').fadeOut(200);
             $('.pic_show').fadeOut(200)
         });
+        
+        // 改变窗口大小时，自动改变图片与顶部的距离  -- Gelomen
+        $(window).resize(function(){
+            var browserHeight = $(window).height();
+            var pic_boxHeight = $(".pic_box").height();
+            var top = (browserHeight - pic_boxHeight)/2;
+            $('.pic_box').css("margin-top", top + "px")
+        });
 
         // 距离顶部超过浏览器窗口一屏时，回到顶部按钮才出现  -- Gelomen
         $(window).scroll(function(){

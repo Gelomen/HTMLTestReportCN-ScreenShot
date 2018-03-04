@@ -123,6 +123,14 @@ table       { font-size: 100%; }
             $('.pic_looper').fadeOut(200);
             $('.pic_show').fadeOut(200)
         });
+        
+        // 改变窗口大小时，自动改变图片与顶部的距离  -- Gelomen
+        $(window).resize(function(){
+            var browserHeight = $(window).height();
+            var pic_boxHeight = $(".pic_box").height();
+            var top = (browserHeight - pic_boxHeight)/2;
+            $('.pic_box').css("margin-top", top + "px")
+        });
 
         // 距离顶部超过浏览器窗口一屏时，回到顶部按钮才出现  -- Gelomen
         $(window).scroll(function(){
@@ -243,7 +251,7 @@ function html_escape(s) {
 <div class='heading'>
 <h1 style="font-family: Microsoft YaHei">Test Report</h1>
 <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-03-04 22:07:58</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-03-04 22:14:12</p>
 <p class='attribute'><strong>合计耗时 : </strong> 0:00:00</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
 <p class='attribute'><strong>失败用例合集 : </strong> <ol style='float: left; margin-right: 100px;'><li>test2 (Test.TestClass)</li></ol></p>
