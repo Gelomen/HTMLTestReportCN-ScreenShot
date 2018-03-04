@@ -464,8 +464,8 @@ table       { font-size: 100%; }
 }
 
 .pic_box{
-    width:80%;
-    height:80%;
+    width:90%;
+    height:90%;
     margin:40px auto;
     text-align: center;
     overflow: hidden;
@@ -473,6 +473,8 @@ table       { font-size: 100%; }
 
 .pic_box img{
     max-width:1020px;
+    width: auto;
+    height: 100%;
 }
 
 /* -- report ------------------------------------------------------------------------ */
