@@ -480,7 +480,6 @@ table       { font-size: 100%; }
 }
 
 .pic_box img{
-    max-width:1020px;
     width: auto;
     height: 100%;
 }

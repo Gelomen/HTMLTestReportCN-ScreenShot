@@ -68,7 +68,6 @@ table       { font-size: 100%; }
 }
 
 .pic_box img{
-    max-width:1020px;
     width: auto;
     height: 100%;
 }
@@ -251,10 +250,10 @@ function html_escape(s) {
 <div class='heading'>
 <h1 style="font-family: Microsoft YaHei">Test Report</h1>
 <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-03-04 22:13:39</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:19.403109</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-03-04 22:37:43</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:00</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
-<p class='attribute'><strong>失败用例合集 : </strong> <ol style='float: left; margin-right: 100px;'><li>test2_title (Test.TestClass)</li></ol></p>
+<p class='attribute'><strong>失败用例合集 : </strong> <ol style='float: left; margin-right: 100px;'><li>test2 (Test.TestClass)</li></ol></p>
 <p class='attribute'><strong>错误用例合集 : </strong> <ol style='float: left; margin-right: 100px;'>无</ol></p>
 
 <p class='description'>测试报告</p>
@@ -294,52 +293,47 @@ function html_escape(s) {
     <td class="text-center">1</td>
     <td class="text-center">1</td>
     <td class="text-center">0</td>
-    <td class="text-center">19.4秒</td>
+    <td class="text-center">0.0秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>详细</a></td>
 </tr>
 
 <tr id='pt1_1' class='hiddenRow'>
-    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test1_find_input</div></td>
+    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test1</div></td>
     <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
     <td class='passCase' style="vertical-align: middle"></td>
 </tr>
 
-<tr id='ft1_2' class='none'>
-    <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2_title</div></td>
-    <td colspan='5' align='center'>
-    <!--默认收起错误信息 -Findyou
-    <button id='btn_ft1_2' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
-    <div id='div_ft1_2' class="collapse">  -->
+    <tr id='ft1_2' class='none'>
+        <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2</div></td>
+        <td colspan='5' align='center'>
+        <!--默认收起错误信息 -Findyou
+        <button id='btn_ft1_2' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+        <div id='div_ft1_2' class="collapse">  -->
 
-    <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
-    <button id='btn_ft1_2' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_ft1_2,#div_ft1_2_screenshot'>失败</button>
-    <div id='div_ft1_2' class="collapse in">
-    <pre style="text-align:left">
+        <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
+        <button id='btn_ft1_2' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+        <div id='div_ft1_2' class="collapse in">
+        <pre style="text-align:left">
+        
+ft1_2: Traceback (most recent call last):
+  File "F:\PycharmProject\HTMLTestReportCN_ScreenShot\src\source\dontNeedScreenShot\Test.py", line 25, in test2
+    self.assertEqual(self.a, self.b, "a ≠ b!")
+AssertionError: 1 != 2 : a ≠ b!
+
+
+        </pre>
+        </div>
+        </td>
+        <td class='failCase' style="vertical-align: middle"></td>
+    </tr>
     
-ft1_2: errorImg[1.png]errorImg, browser[chrome(63.0.3239.132)]browser
-Traceback (most recent call last):
-  File "F:\PycharmProject\HTMLTestReportCN_ScreenShot\src\source\needScreenShot\Test.py", line 30, in test2_title
-    self.assertEqual(title, "百度一下，你就知道!", "Title不一致！")
-AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
-- 百度一下，你就知道
-+ 百度一下，你就知道!
-?          +
- : Title不一致！
-
-
-    </pre>
-    </div>
-    </td>
-    <td class="text-center" style="vertical-align: middle"><div id='div_ft1_2_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">chrome(63.0.3239.132)</div></br>截图：<a class="screenshot" href="javascript:void(0)" img="1.png">img_1.png</a></div></td>
-</tr>
-
 <tr id='total_row' class="text-center active">
     <td>总计</td>
     <td>2</td>
     <td>1</td>
     <td>1</td>
     <td>0</td>
-    <td>19.4秒</td>
+    <td>0.0秒</td>
     <td>通过率：50.00%</td>
 </tr>
 </table>
