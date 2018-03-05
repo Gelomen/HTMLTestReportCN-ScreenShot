@@ -67,11 +67,17 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
 __author__ = "Wai Yip Tung,  Findyou,  Gelomen"
-__version__ = "0.9.8"
+__version__ = "0.9.9"
 
 
 """
 Change History
+Version 0.9.9 -- Gelomen
+* 优化报告文件夹命名
+* 优化截图存放的目录
+* 增加图片阴影边框以突出图片
+* 优化 失败用例合集 和 错误用例合集 显示的颜色
+
 Version 0.9.8 -- Gelomen
 * 优化回到顶部按钮的显示方式
 
@@ -442,6 +448,12 @@ table       { font-size: 100%; }
     width: 100px;
     float: left;
 }
+.failCaseOl li {
+    color: red
+}
+.errorCaseOl li {
+    color: orange
+}
 
 /* --- 打开截图特效样式 -- Gelomen --- */
 .data-img{
@@ -472,6 +484,7 @@ table       { font-size: 100%; }
 }
 
 .pic_box{
+    padding:10px;
     width:90%;
     height:90%;
     margin:40px auto;
@@ -482,6 +495,9 @@ table       { font-size: 100%; }
 .pic_box img{
     width: auto;
     height: 100%;
+    -moz-box-shadow: 0px 0px 20px 0px #000;
+    -webkit-box-shadow: 0px 0px 20px 0px #000;
+    box-shadow: 0px 0px 20px 0px #000;
 }
 
 /* -- report ------------------------------------------------------------------------ */
@@ -587,7 +603,7 @@ table       { font-size: 100%; }
     </pre>
     </div>
     </td>
-    <td class="text-center" style="vertical-align: middle"><div id='div_%(tid)s_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">%(browser)s</div></br>截图：<a class="screenshot" href="javascript:void(0)" img="%(screenshot)s">img_%(screenshot)s</a></div></td>
+    <td class="text-center" style="vertical-align: middle"><div id='div_%(tid)s_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">%(browser)s</div></br>截图：<a class="screenshot" href="javascript:void(0)" img="image/%(screenshot)s">img_%(screenshot)s</a></div></td>
 </tr>
 """  # variables: (tid, Class, style, desc, status)
 
@@ -870,14 +886,20 @@ class HTMLTestRunner(Template_mixin):
         return self.STYLESHEET_TMPL
 
     # 增加Tester显示 -Findyou
+    # 增加 失败用例合集 和 错误用例合集 的显示  -- Gelomen
     def _generate_heading(self, report_attrs):
         a_lines = []
         for name, value in report_attrs:
             # 如果是 失败用例 或 错误用例合集，则不进行转义 -- Gelomen
-            if name == "失败用例合集" or name == "错误用例合集":
+            if name == "失败用例合集":
                 line = self.HEADING_ATTRIBUTE_TMPL % dict(
                     name=name,
-                    value="<ol style='float: left; margin-right: 100px;'>" + value + "</ol>",
+                    value="<ol class='failCaseOl' style='float: left; margin-right: 100px;'>" + value + "</ol>",
+                    )
+            elif name == "错误用例合集":
+                line = self.HEADING_ATTRIBUTE_TMPL % dict(
+                    name=name,
+                    value="<ol class='errorCaseOl' style='float: left; margin-right: 100px;'>" + value + "</ol>",
                     )
             else:
                 line = self.HEADING_ATTRIBUTE_TMPL % dict(
@@ -1030,7 +1052,7 @@ class DirAndFiles(object):
         self.path = "../../result/"
 
     def create_dir(self):
-        now = str(datetime.datetime.now().strftime("%Y-%m-%d(%H-%M-%S)"))
+        now = str(datetime.datetime.now().strftime("%Y{y}%m{m}%d{d}(%H{H}%M{M}%S{S})").format(y="年", m="月", d="日", H="时", M="分", S="秒"))
         dir_path = self.path + now
 
         # 判断文件夹是否存在，不存在则创建
@@ -1048,17 +1070,23 @@ class DirAndFiles(object):
 
     def get_screenshot(self, browser):
 
-        # 获取最新文件夹的名字，并将截图保存在该文件夹下
+        # 获取最新文件夹的名字，并将截图保存在该目录的image文件夹
         i = 1
         new_dir = self.get_new_dir()
-        img_path = new_dir + "/" + str(i) + ".png"
+        img_dir = new_dir + "/image"
+        # 判断文件夹是否存在，不存在则创建
+        is_dir = os.path.isdir(img_dir)
+        if not is_dir:
+            os.makedirs(img_dir)
+
+        img_path = img_dir + "/" + str(i) + ".png"
 
         # 有可能同个测试步骤出错，截图名字一样导致覆盖文件，所以名字存在则增加id
         while True:
             is_file = os.path.isfile(img_path)
             if is_file:
                 i += 1
-                img_path = new_dir + "/" + str(i) + ".png"
+                img_path = img_dir + "/" + str(i) + ".png"
             else:
                 break
 

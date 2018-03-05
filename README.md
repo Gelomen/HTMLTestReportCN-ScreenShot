@@ -7,6 +7,12 @@
 > * [boafantasy](https://github.com/boafantasy) 大神原版：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+Version 0.9.9 -- Gelomen
+* 优化报告文件夹命名
+* 优化截图存放的目录
+* 增加图片阴影边框以突出图片
+* 优化 失败用例合集 和 错误用例合集 显示的颜色
+
 Version 0.9.8 -- Gelomen
 * 优化回到顶部按钮的显示方式
 
@@ -120,7 +126,7 @@ class RunAllTests(object):
         new_dir = daf.get_new_dir()
 
         # 在最新文件夹下新建测试报告
-        now = str(datetime.datetime.now().strftime("%Y-%m-%d(%H-%M-%S)"))
+        now = str(datetime.datetime.now().strftime("%Y{y}%m{m}%d{d}(%H{H}%M{M}%S{S})").format(y="年", m="月", d="日", H="时", M="分", S="秒"))
         file_path = new_dir + "/Test_report_" + now + ".html"
 
         fp = open(file_path, "wb")
@@ -133,6 +139,7 @@ class RunAllTests(object):
 
 if __name__ == "__main__":
     RunAllTests().run()
+
 ```
 
 -----
