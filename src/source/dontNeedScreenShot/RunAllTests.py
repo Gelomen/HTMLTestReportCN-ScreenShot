@@ -23,7 +23,8 @@ class RunAllTests(object):
         new_dir = daf.get_new_dir()
 
         # 在最新文件夹下新建测试报告
-        now = str(datetime.datetime.now().strftime("%Y{y}%m{m}%d{d}(%H{H}%M{M}%S{S})").format(y="年", m="月", d="日", H="时", M="分", S="秒"))
+        now = str(datetime.datetime.now().strftime("%Y{y}%m{m}%d{d}(%H{H}%M{M}%S{S})")
+                  .format(y="年", m="月", d="日", H="时", M="分", S="秒"))
         file_path = new_dir + "/Test_report_" + now + ".html"
 
         fp = open(file_path, "wb")

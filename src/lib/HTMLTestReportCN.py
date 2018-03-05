@@ -1052,7 +1052,8 @@ class DirAndFiles(object):
         self.path = "../../result/"
 
     def create_dir(self):
-        now = str(datetime.datetime.now().strftime("%Y{y}%m{m}%d{d}(%H{H}%M{M}%S{S})").format(y="年", m="月", d="日", H="时", M="分", S="秒"))
+        now = str(datetime.datetime.now().strftime("%Y{y}%m{m}%d{d}(%H{H}%M{M}%S{S})")
+                  .format(y="年", m="月", d="日", H="时", M="分", S="秒"))
         dir_path = self.path + now
 
         # 判断文件夹是否存在，不存在则创建
