@@ -1,6 +1,6 @@
 # coding=utf-8
 
-""""" 载入场景测试用例 """""
+""""" 百度首页测试用例 """""
 
 import unittest
 from selenium import webdriver
