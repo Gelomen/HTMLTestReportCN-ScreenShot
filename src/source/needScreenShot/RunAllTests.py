@@ -3,7 +3,6 @@
 """"" 运行 “.” (当前)目录下的所有测试用例，并生成HTML测试报告 """""
 
 import unittest
-import datetime
 from src.lib import HTMLTestReportCN
 
 
@@ -11,23 +10,18 @@ class RunAllTests(object):
 
     def __init__(self):
         self.test_case_path = "."
-        self.title = "Test Report"
+        self.title = "Test Report by Gelomen"
         self.description = "测试报告"
 
     def run(self):
         test_suite = unittest.TestLoader().discover(self.test_case_path)
 
-        # 启动测试时创建文件夹并获取最新文件夹的名字
+        # 启动测试时创建文件夹并获取对应的文件夹名字
         daf = HTMLTestReportCN.DirAndFiles()
-        daf.create_dir()
-        new_dir = daf.get_new_dir()
+        daf.create_dir(title=self.title)
+        report_path = HTMLTestReportCN.GlobalVar.get_value("report_path")
 
-        # 在最新文件夹下新建测试报告
-        now = str(datetime.datetime.now().strftime("%Y{y}%m{m}%d{d}(%H{H}%M{M}%S{S})")
-                  .format(y="年", m="月", d="日", H="时", M="分", S="秒"))
-        file_path = new_dir + "/Test_report_" + now + ".html"
-
-        fp = open(file_path, "wb")
+        fp = open(report_path, "wb")
 
         # need_screenshot = 1，表示是UI自动化测试，需执行截图
         runner = HTMLTestReportCN.HTMLTestRunner(stream=fp, need_screenshot=1, title=self.title, description=self.description, tester=input("请输入你的名字："))

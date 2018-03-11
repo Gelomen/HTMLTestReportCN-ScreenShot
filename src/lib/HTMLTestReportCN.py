@@ -66,12 +66,16 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: http://tungwaiyip.info/software/HTMLTestRunner.html
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
-__author__ = "Wai Yip Tung,  Findyou,  Gelomen"
-__version__ = "1.0.0"
+__author__ = "Wai Yip Tung,  Findyou,  boafantasy,  Gelomen"
+__version__ = "1.0.1"
 
 
 """
 Change History
+Version 1.0.1 -- Gelomen
+* 修复报告存入文件夹的bug
+* 优化报告的命名方式
+
 Version 1.0.0 -- Gelomen
 * 修改测试报告文件夹路径的获取方式
 * 修改截图获取文件夹路径的获取方式
@@ -1077,27 +1081,32 @@ class DirAndFiles(object):
 
     def __init__(self):
         self.path = "../../result/"
+        self.title = "Test Report"
 
-    def create_dir(self):
-        now = str(datetime.datetime.now().strftime("%Y{y}%m{m}%d{d}(%H{H}%M{M}%S{S})")
-                  .format(y="年", m="月", d="日", H="时", M="分", S="秒"))
-        dir_path = self.path + now
+    def create_dir(self, title=None):
+        i = 1.0
 
+        if title is not None:
+            self.title = title
+
+        dir_path = self.path + self.title + "V" + str(round(i, 1))
         # 判断文件夹是否存在，不存在则创建
-        is_dir = os.path.isdir(dir_path)
-        if not is_dir:
-            os.makedirs(dir_path)
+        while True:
+            is_dir = os.path.isdir(dir_path)
+            if is_dir:
+                i += 0.1
+                dir_path = self.path + self.title + "V" + str(round(i, 1))
+            else:
+                break
 
-        # 将新建的文件夹路径存入全局变量
+        os.makedirs(dir_path)
+
+        # 测试报告路径
+        report_path = dir_path + "/" + self.title + "V" + str(round(i, 1)) + ".html"
+
+        # 将新建的 文件夹路径 和 报告路径 存入全局变量
         GlobalVar.set_value("dir_path", dir_path)
-
-    def get_new_dir(self):
-        lists = os.listdir(self.path)
-        # 按时间排序
-        lists.sort(key=lambda fn: os.path.getmtime(self.path + "\\" + fn))
-        # 获取最新文件或文件夹
-        new_dir = os.path.join(self.path, lists[-1])
-        return new_dir
+        GlobalVar.set_value("report_path", report_path)
 
     @staticmethod
     def get_screenshot(browser):
