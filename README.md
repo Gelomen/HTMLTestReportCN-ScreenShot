@@ -3,10 +3,14 @@
 > #### 带有截图功能的HTMLTestReportCN
 > * 在大神 [findyou](https://github.com/findyou) 和 [boafantasy](https://github.com/boafantasy) 两人的版本基础上，添加截图功能，并修复bug和优化细节
 > * 此版本目前同时拥有无截图和有截图报告功能，通过参数 `need_screenshot=1` 开启截图功能
-> * [findyou](https://github.com/findyou) 大神原版：https://github.com/findyou/HTMLTestRunnerCN
-> * [boafantasy](https://github.com/boafantasy) 大神原版：https://github.com/boafantasy/HTMLTestRunnerCN
+> * [findyou](https://github.com/findyou) 大神版本：https://github.com/findyou/HTMLTestRunnerCN
+> * [boafantasy](https://github.com/boafantasy) 大神版本：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+Version 1.0.0 -- Gelomen
+* 修改测试报告文件夹路径的获取方式
+* 修改截图获取文件夹路径的获取方式
+
 Version 0.9.9 -- Gelomen
 * 优化报告文件夹命名
 * 优化截图存放的目录

@@ -67,11 +67,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
 __author__ = "Wai Yip Tung,  Findyou,  Gelomen"
-__version__ = "0.9.9"
+__version__ = "1.0.0"
 
 
 """
 Change History
+Version 1.0.0 -- Gelomen
+* 修改测试报告文件夹路径的获取方式
+* 修改截图获取文件夹路径的获取方式
+
 Version 0.9.9 -- Gelomen
 * 优化报告文件夹命名
 * 优化截图存放的目录
@@ -150,7 +154,28 @@ import unittest
 from xml.sax import saxutils
 import sys
 import os
-from src.lib.GlobalVar import GlobalVar as gl
+
+
+# 全局变量      -- Gelomen
+_global_dict = {}
+
+
+# 让新建的报告文件夹路径存入全局变量       -- Gelomen
+class GlobalVar(object):
+    def __init__(self):
+        global _global_dict
+        _global_dict = {}
+
+    @staticmethod
+    def set_value(name, value):
+        _global_dict[name] = value
+
+    @staticmethod
+    def get_value(name):
+        try:
+            return _global_dict[name]
+        except KeyError:
+            return None
 
 # ------------------------------------------------------------------------
 # The redirectors below are used to capture output during testing. Output
@@ -1063,7 +1088,8 @@ class DirAndFiles(object):
         if not is_dir:
             os.makedirs(dir_path)
 
-        gl.set_value("dir_path", dir_path)
+        # 将新建的文件夹路径存入全局变量
+        GlobalVar.set_value("dir_path", dir_path)
 
     def get_new_dir(self):
         lists = os.listdir(self.path)
@@ -1073,11 +1099,13 @@ class DirAndFiles(object):
         new_dir = os.path.join(self.path, lists[-1])
         return new_dir
 
-    def get_screenshot(self, browser):
-
-        # 获取最新文件夹的名字，并将截图保存在该目录的image文件夹
+    @staticmethod
+    def get_screenshot(browser):
         i = 1
-        new_dir = gl.get_value("dir_path")
+
+        # 通过全局变量获取文件夹路径
+        new_dir = GlobalVar.get_value("dir_path")
+
         img_dir = new_dir + "/image"
         # 判断文件夹是否存在，不存在则创建
         is_dir = os.path.isdir(img_dir)
