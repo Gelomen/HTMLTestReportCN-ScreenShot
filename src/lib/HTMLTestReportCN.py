@@ -150,6 +150,7 @@ import unittest
 from xml.sax import saxutils
 import sys
 import os
+from src.lib.GlobalVar import GlobalVar as gl
 
 # ------------------------------------------------------------------------
 # The redirectors below are used to capture output during testing. Output
@@ -804,7 +805,8 @@ class HTMLTestRunner(Template_mixin):
         self.stopTime = datetime.datetime.now()
         self.generateReport(test, result)
         # 优化测试结束后打印蓝色提示文字 -- Gelomen
-        print("\n\033[36;0m--------------------- 测试结束 ---------------------\n------------- 合计耗时: %s -------------\033[0m" % (self.stopTime - self.startTime), file=sys.stderr)
+        print("\n\033[36;0m--------------------- 测试结束 ---------------------\n"
+              "------------- 合计耗时: %s -------------\033[0m" % (self.stopTime - self.startTime), file=sys.stderr)
         return result
 
     def sortResult(self, result_list):
@@ -1061,6 +1063,8 @@ class DirAndFiles(object):
         if not is_dir:
             os.makedirs(dir_path)
 
+        gl.set_value("dir_path", dir_path)
+
     def get_new_dir(self):
         lists = os.listdir(self.path)
         # 按时间排序
@@ -1073,7 +1077,7 @@ class DirAndFiles(object):
 
         # 获取最新文件夹的名字，并将截图保存在该目录的image文件夹
         i = 1
-        new_dir = self.get_new_dir()
+        new_dir = gl.get_value("dir_path")
         img_dir = new_dir + "/image"
         # 判断文件夹是否存在，不存在则创建
         is_dir = os.path.isdir(img_dir)
