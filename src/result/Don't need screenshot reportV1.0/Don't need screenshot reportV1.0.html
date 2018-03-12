@@ -90,7 +90,7 @@ table       { font-size: 100%; }
 /* --- 饼状图div样式 -- Gelomen --- */
 #container {
     width: 450px;
-    height: 400px;
+    height: 300px;
     float: left;
 }
 
@@ -175,7 +175,7 @@ table       { font-size: 100%; }
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                spacing : [100, 0 , 40, 0]
+                spacing : [0, 0, 0, 0]
             },
             credits: {
                 enabled: false
@@ -353,17 +353,20 @@ function html_escape(s) {
 <div style="width: 700px ;float: left;">
     <h1 style="font-family: Microsoft YaHei">Don't need screenshot report</h1>
     <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-03-12 21:51:21</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-03-12 23:13:50</p>
 <p class='attribute'><strong>合计耗时 : </strong> 0:00:00</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
 <p class='attribute'><strong>失败用例合集 : </strong> <ol class='failCaseOl' style='float: left; margin-right: 100px;'><li>test2 (Test.TestClass)</li></ol></p>
 <p class='attribute'><strong>错误用例合集 : </strong> <ol class='errorCaseOl' style='float: left; margin-right: 100px;'>无</ol></p>
 
+    <p class='description'>测试报告</p>
 </div>
-<p class='description'>测试报告</p>
+</div>
+<div id="container"></div>
 
 
 
+<div style="width: 500px;">
 <p id='show_detail_line'>
 <a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 50.00% }</a>
 <a class="btn btn-success" href='javascript:showCase(2)'>通过{ 1 }</a>
@@ -372,7 +375,6 @@ function html_escape(s) {
 <a class="btn btn-info" href='javascript:showCase(4)'>所有{ 2 }</a>
 </p>
 </div>
-<div id="container"></div>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
 <colgroup>
 <col align='left' />

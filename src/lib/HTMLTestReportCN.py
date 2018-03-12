@@ -354,7 +354,7 @@ class Template_mixin(object):
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false,
-                spacing : [100, 0 , 40, 0]
+                spacing : [0, 0, 0, 0]
             },
             credits: {
                 enabled: false
@@ -622,7 +622,7 @@ table       { font-size: 100%; }
 /* --- 饼状图div样式 -- Gelomen --- */
 #container {
     width: 450px;
-    height: 400px;
+    height: 300px;
     float: left;
 }
 
@@ -650,8 +650,10 @@ table       { font-size: 100%; }
 <div style="width: 700px ;float: left;">
     <h1 style="font-family: Microsoft YaHei">%(title)s</h1>
     %(parameters)s
+    <p class='description'>%(description)s</p>
 </div>
-<p class='description'>%(description)s</p>
+</div>
+<div id="container"></div>
 
 """  # variables: (title, parameters, description)
 
@@ -663,6 +665,7 @@ table       { font-size: 100%; }
     #
     # 汉化,加美化效果 --Findyou
     REPORT_TMPL = """
+<div style="width: 500px;">
 <p id='show_detail_line'>
 <a class="btn btn-primary" href='javascript:showCase(0)'>概要{ %(passrate)s }</a>
 <a class="btn btn-success" href='javascript:showCase(2)'>通过{ %(Pass)s }</a>
@@ -671,7 +674,6 @@ table       { font-size: 100%; }
 <a class="btn btn-info" href='javascript:showCase(4)'>所有{ %(count)s }</a>
 </p>
 </div>
-<div id="container"></div>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
 <colgroup>
 <col align='left' />
