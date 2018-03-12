@@ -3,11 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Test Report by Gelomen</title>
-    <meta name="generator" content="HTMLTestRunner 1.0.0"/>
+    <meta name="generator" content="HTMLTestRunner 1.0.2"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
     
 <style type="text/css" media="screen">
 body        { font-family: Microsoft YaHei;padding: 20px; font-size: 100%; }
@@ -51,6 +53,7 @@ table       { font-size: 100%; }
     opacity: 0.6;
     background: #000;
     display: none;
+    z-index: 100;
 }
 
 .pic_show{
@@ -63,6 +66,7 @@ table       { font-size: 100%; }
     margin:auto;
     text-align: center;
     display: none;
+    z-index: 100;
 }
 
 .pic_box{
@@ -80,6 +84,14 @@ table       { font-size: 100%; }
     -moz-box-shadow: 0px 0px 20px 0px #000;
     -webkit-box-shadow: 0px 0px 20px 0px #000;
     box-shadow: 0px 0px 20px 0px #000;
+}
+
+/* --- 饼状图div样式 -- Gelomen --- */
+#container {
+    width: 450px;
+    height: 400px;
+    float: left;
+    margin-left: 15%;
 }
 
 /* -- report ------------------------------------------------------------------------ */
@@ -156,6 +168,72 @@ table       { font-size: 100%; }
         $("#toTop").click(function() {
             $("html,body").animate({"scrollTop":0}, 700)
         })
+        
+        // 增加饼状图  -- Gelomen
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                spacing : [100, 0 , 40, 0]
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                floating:true,
+                text: '测试结果占比'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    colors: ['#81ca9d', '#fdc68c', '#f16d7e'],
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    },
+                    point: {
+                        events: {
+                            mouseOver: function(e) {  // 鼠标滑过时动态更新标题
+                                chart.setTitle({
+                                    text: e.target.name+ '\t'+ e.target.y + ' 个'
+                                });
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                innerSize: '80%',
+                name: '比例',
+                data: [
+                    ['通过', 1],
+                    ['错误', 0],
+                    {
+                        name: '失败',
+                        y: 1,
+                        sliced: true,
+                        selected: true
+                    }
+                ]
+            }]
+        }, function(c) {
+            // 环形图圆心
+            var centerY = c.series[0].center[1],
+                titleHeight = parseInt(c.title.styles.fontSize);
+            c.setTitle({
+                y:centerY + titleHeight/2
+            });
+            chart = c;
+        });
     });
     
     
@@ -179,6 +257,9 @@ function showCase(level) {
             }
             else {
                 tr.className = '';
+                // 切换筛选时只显示预览   -- Gelomen
+                $("div[id^='div_ft']").attr("class", "collapse");
+                $("div[id^='div_et']").attr("class", "collapse");
             }
         }
         if (id.substr(0,2) == 'pt') {
@@ -187,6 +268,9 @@ function showCase(level) {
             }
             else {
                 tr.className = '';
+                // 切换筛选时只显示预览   -- Gelomen
+                $("div[id^='div_ft']").attr("class", "collapse");
+                $("div[id^='div_et']").attr("class", "collapse");
             }
         }
         if (id.substr(0,2) == 'et') {
@@ -195,6 +279,9 @@ function showCase(level) {
             }
             else {
                 tr.className = '';
+                // 切换筛选时只显示预览   -- Gelomen
+                $("div[id^='div_ft']").attr("class", "collapse");
+                $("div[id^='div_et']").attr("class", "collapse");
             }
         }
     }
@@ -258,14 +345,17 @@ function html_escape(s) {
 </script>
 <div class='pic_looper'></div> <div class='pic_show'><div class='pic_box'><img src=''/></div> </div>
 <div class='heading'>
-<h1 style="font-family: Microsoft YaHei">Test Report by Gelomen</h1>
-<p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-03-11 17:41:38</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:16.353832</p>
+<div style="width: 700px ;float: left;">
+    <h1 style="font-family: Microsoft YaHei">Test Report by Gelomen</h1>
+    <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-03-12 16:36:56</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:00</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
-<p class='attribute'><strong>失败用例合集 : </strong> <ol class='failCaseOl' style='float: left; margin-right: 100px;'><li>test2_title (Test.TestClass)</li></ol></p>
+<p class='attribute'><strong>失败用例合集 : </strong> <ol class='failCaseOl' style='float: left; margin-right: 100px;'><li>test2 (Test.TestClass)</li></ol></p>
 <p class='attribute'><strong>错误用例合集 : </strong> <ol class='errorCaseOl' style='float: left; margin-right: 100px;'>无</ol></p>
 
+</div>
+<div id="container"></div>
 <p class='description'>测试报告</p>
 </div>
 
@@ -303,52 +393,47 @@ function html_escape(s) {
     <td class="text-center">1</td>
     <td class="text-center">1</td>
     <td class="text-center">0</td>
-    <td class="text-center">16.36秒</td>
+    <td class="text-center">0.0秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>详细</a></td>
 </tr>
 
 <tr id='pt1_1' class='hiddenRow'>
-    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test1_find_input</div></td>
+    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test1</div></td>
     <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
     <td class='passCase' style="vertical-align: middle"></td>
 </tr>
 
-<tr id='ft1_2' class='none'>
-    <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2_title</div></td>
-    <td colspan='5' align='center'>
-    <!--默认收起错误信息 -Findyou
-    <button id='btn_ft1_2' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
-    <div id='div_ft1_2' class="collapse">  -->
+    <tr id='ft1_2' class='none'>
+        <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2</div></td>
+        <td colspan='5' align='center'>
+        <!--默认收起错误信息 -Findyou
+        <button id='btn_ft1_2' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+        <div id='div_ft1_2' class="collapse">  -->
 
-    <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
-    <button id='btn_ft1_2' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_ft1_2,#div_ft1_2_screenshot'>失败</button>
-    <div id='div_ft1_2' class="collapse in">
-    <pre style="text-align:left">
+        <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
+        <button id='btn_ft1_2' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+        <div id='div_ft1_2' class="collapse in">
+        <pre style="text-align:left">
+        
+ft1_2: Traceback (most recent call last):
+  File "E:\Gelomen\PycharmProjects\HTMLTestReportCN_ScreenShot\src\source\dontNeedScreenShot\Test.py", line 25, in test2
+    self.assertEqual(self.a, self.b, "a ≠ b!")
+AssertionError: 1 != 2 : a ≠ b!
+
+
+        </pre>
+        </div>
+        </td>
+        <td class='failCase' style="vertical-align: middle"></td>
+    </tr>
     
-ft1_2: errorImg[1.png]errorImg, browser[chrome(63.0.3239.132)]browser
-Traceback (most recent call last):
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\src\source\needScreenShot\Test.py", line 30, in test2_title
-    self.assertEqual(title, "百度一下，你就知道!", "Title不一致！")
-AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
-- 百度一下，你就知道
-+ 百度一下，你就知道!
-?          +
- : Title不一致！
-
-
-    </pre>
-    </div>
-    </td>
-    <td class="text-center" style="vertical-align: middle"><div id='div_ft1_2_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">chrome(63.0.3239.132)</div></br>截图：<a class="screenshot" href="javascript:void(0)" img="image/1.png">img_1.png</a></div></td>
-</tr>
-
 <tr id='total_row' class="text-center active">
     <td>总计</td>
     <td>2</td>
     <td>1</td>
     <td>1</td>
     <td>0</td>
-    <td>16.36秒</td>
+    <td>0.0秒</td>
     <td>通过率：50.00%</td>
 </tr>
 </table>
