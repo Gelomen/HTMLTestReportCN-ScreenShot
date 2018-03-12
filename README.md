@@ -169,3 +169,6 @@ def test1(self):
 
 #### 4. 生成HTML测试报告文档
 与 一、6相同，但 **注意：`HTMLTestReportCN.HTMLTestRunner()` 的参数 `need_screenshot=1` 需改为 `need_screenshot=0` 以关闭嵌入截图功能，其他一致**
+
+### 预览
+![report gif](https://github.com/Gelomen/HTMLTestReportCN-ScreenShot/raw/master/src/assets/report.gif =100)
