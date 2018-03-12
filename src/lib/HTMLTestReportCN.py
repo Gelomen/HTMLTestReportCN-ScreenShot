@@ -169,7 +169,7 @@ _global_dict = {}
 
 
 # 让新建的报告文件夹路径存入全局变量       -- Gelomen
-class GlobalVar(object):
+class GlobalMsg(object):
     def __init__(self):
         global _global_dict
         _global_dict = {}
@@ -551,6 +551,7 @@ table       { font-size: 100%; }
 .heading {
     margin-top: 0ex;
     margin-bottom: 1ex;
+    float: left;
 }
 
 .heading .description {
@@ -623,7 +624,6 @@ table       { font-size: 100%; }
     width: 450px;
     height: 400px;
     float: left;
-    margin-left: 15%;
 }
 
 /* -- report ------------------------------------------------------------------------ */
@@ -651,9 +651,7 @@ table       { font-size: 100%; }
     <h1 style="font-family: Microsoft YaHei">%(title)s</h1>
     %(parameters)s
 </div>
-<div id="container"></div>
 <p class='description'>%(description)s</p>
-</div>
 
 """  # variables: (title, parameters, description)
 
@@ -672,6 +670,8 @@ table       { font-size: 100%; }
 <a class="btn btn-warning" href='javascript:showCase(3)'>错误{ %(error)s }</a>
 <a class="btn btn-info" href='javascript:showCase(4)'>所有{ %(count)s }</a>
 </p>
+</div>
+<div id="container"></div>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
 <colgroup>
 <col align='left' />
@@ -1217,15 +1217,15 @@ class DirAndFiles(object):
         report_path = dir_path + "/" + self.title + "V" + str(round(i, 1)) + ".html"
 
         # 将新建的 文件夹路径 和 报告路径 存入全局变量
-        GlobalVar.set_value("dir_path", dir_path)
-        GlobalVar.set_value("report_path", report_path)
+        GlobalMsg.set_value("dir_path", dir_path)
+        GlobalMsg.set_value("report_path", report_path)
 
     @staticmethod
     def get_screenshot(browser):
         i = 1
 
         # 通过全局变量获取文件夹路径
-        new_dir = GlobalVar.get_value("dir_path")
+        new_dir = GlobalMsg.get_value("dir_path")
 
         img_dir = new_dir + "/image"
         # 判断文件夹是否存在，不存在则创建

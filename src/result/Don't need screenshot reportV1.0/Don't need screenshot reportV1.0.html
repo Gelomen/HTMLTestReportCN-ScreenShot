@@ -19,6 +19,7 @@ table       { font-size: 100%; }
 .heading {
     margin-top: 0ex;
     margin-bottom: 1ex;
+    float: left;
 }
 
 .heading .description {
@@ -91,7 +92,6 @@ table       { font-size: 100%; }
     width: 450px;
     height: 400px;
     float: left;
-    margin-left: 15%;
 }
 
 /* -- report ------------------------------------------------------------------------ */
@@ -353,16 +353,14 @@ function html_escape(s) {
 <div style="width: 700px ;float: left;">
     <h1 style="font-family: Microsoft YaHei">Don't need screenshot report</h1>
     <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-03-12 17:05:06</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-03-12 21:51:21</p>
 <p class='attribute'><strong>合计耗时 : </strong> 0:00:00</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
 <p class='attribute'><strong>失败用例合集 : </strong> <ol class='failCaseOl' style='float: left; margin-right: 100px;'><li>test2 (Test.TestClass)</li></ol></p>
 <p class='attribute'><strong>错误用例合集 : </strong> <ol class='errorCaseOl' style='float: left; margin-right: 100px;'>无</ol></p>
 
 </div>
-<div id="container"></div>
 <p class='description'>测试报告</p>
-</div>
 
 
 
@@ -373,6 +371,8 @@ function html_escape(s) {
 <a class="btn btn-warning" href='javascript:showCase(3)'>错误{ 0 }</a>
 <a class="btn btn-info" href='javascript:showCase(4)'>所有{ 2 }</a>
 </p>
+</div>
+<div id="container"></div>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
 <colgroup>
 <col align='left' />
@@ -421,7 +421,7 @@ function html_escape(s) {
         <pre style="text-align:left">
         
 ft1_2: Traceback (most recent call last):
-  File "E:\Gelomen\PycharmProjects\HTMLTestReportCN_ScreenShot\src\source\dontNeedScreenShot\Test.py", line 25, in test2
+  File "F:\PycharmProject\HTMLTestReportCN_ScreenShot\src\source\dontNeedScreenShot\Test.py", line 25, in test2
     self.assertEqual(self.a, self.b, "a ≠ b!")
 AssertionError: 1 != 2 : a ≠ b!
 
