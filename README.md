@@ -1,8 +1,9 @@
 ﻿# HTMLTestReportCN-ScreenShot
 
 > #### 带有截图功能的HTMLTestReportCN
-> * 在大神 [findyou](https://github.com/findyou) 和 [boafantasy](https://github.com/boafantasy) 两人的版本基础上，添加截图功能，并修复bug和优化细节
-> * 此版本目前同时拥有无截图和有截图报告功能，通过参数 `need_screenshot=1` 开启截图功能
+> * 在大神 [findyou](https://github.com/findyou) 和 [boafantasy](https://github.com/boafantasy) 两人的版本基础上，添加功能，并修复bug和优化细节
+> * 目前同时拥有无截图和有截图报告功能，通过参数 `need_screenshot=1` 开启截图功能
+> * 生成的报告有饼图显示，测试结果比较直观
 > * [findyou](https://github.com/findyou) 大神版本：https://github.com/findyou/HTMLTestRunnerCN
 > * [boafantasy](https://github.com/boafantasy) 大神版本：https://github.com/boafantasy/HTMLTestRunnerCN
 
