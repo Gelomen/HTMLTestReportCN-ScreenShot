@@ -67,11 +67,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
 __author__ = "Wai Yip Tung,  Findyou,  boafantasy,  Gelomen"
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 
 """
 Change History
+Version 1.0.2 -- Gelomen
+* 新增测试结果统计饼图
+* 优化筛选时只显示预览
+
 Version 1.0.1 -- Gelomen
 * 修复报告存入文件夹的bug
 * 优化报告的命名方式
@@ -279,6 +283,8 @@ class Template_mixin(object):
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/highcharts.js"></script>
+    <script src="https://img.hcharts.cn/highcharts/modules/exporting.js"></script>
     %(stylesheet)s
 </head>
 <body >
@@ -341,6 +347,72 @@ class Template_mixin(object):
         $("#toTop").click(function() {
             $("html,body").animate({"scrollTop":0}, 700)
         })
+        
+        // 增加饼状图  -- Gelomen
+        $('#container').highcharts({
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                spacing : [100, 0 , 40, 0]
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                floating:true,
+                text: '测试结果占比'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    colors: ['#81ca9d', '#fdc68c', '#f16d7e'],
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %%',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    },
+                    point: {
+                        events: {
+                            mouseOver: function(e) {  // 鼠标滑过时动态更新标题
+                                chart.setTitle({
+                                    text: e.target.name+ '\t'+ e.target.y + ' 个'
+                                });
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                innerSize: '80%%',
+                name: '比例',
+                data: [
+                    ['通过', %(Pass)s],
+                    ['错误', %(error)s],
+                    {
+                        name: '失败',
+                        y: %(fail)s,
+                        sliced: true,
+                        selected: true
+                    }
+                ]
+            }]
+        }, function(c) {
+            // 环形图圆心
+            var centerY = c.series[0].center[1],
+                titleHeight = parseInt(c.title.styles.fontSize);
+            c.setTitle({
+                y:centerY + titleHeight/2
+            });
+            chart = c;
+        });
     });
     
     
@@ -364,6 +436,9 @@ function showCase(level) {
             }
             else {
                 tr.className = '';
+                // 切换筛选时只显示预览   -- Gelomen
+                $("div[id^='div_ft']").attr("class", "collapse");
+                $("div[id^='div_et']").attr("class", "collapse");
             }
         }
         if (id.substr(0,2) == 'pt') {
@@ -372,6 +447,9 @@ function showCase(level) {
             }
             else {
                 tr.className = '';
+                // 切换筛选时只显示预览   -- Gelomen
+                $("div[id^='div_ft']").attr("class", "collapse");
+                $("div[id^='div_et']").attr("class", "collapse");
             }
         }
         if (id.substr(0,2) == 'et') {
@@ -380,6 +458,9 @@ function showCase(level) {
             }
             else {
                 tr.className = '';
+                // 切换筛选时只显示预览   -- Gelomen
+                $("div[id^='div_ft']").attr("class", "collapse");
+                $("div[id^='div_et']").attr("class", "collapse");
             }
         }
     }
@@ -499,6 +580,7 @@ table       { font-size: 100%; }
     opacity: 0.6;
     background: #000;
     display: none;
+    z-index: 100;
 }
 
 .pic_show{
@@ -511,6 +593,7 @@ table       { font-size: 100%; }
     margin:auto;
     text-align: center;
     display: none;
+    z-index: 100;
 }
 
 .pic_box{
@@ -528,6 +611,14 @@ table       { font-size: 100%; }
     -moz-box-shadow: 0px 0px 20px 0px #000;
     -webkit-box-shadow: 0px 0px 20px 0px #000;
     box-shadow: 0px 0px 20px 0px #000;
+}
+
+/* --- 饼状图div样式 -- Gelomen --- */
+#container {
+    width: 450px;
+    height: 400px;
+    float: left;
+    margin-left: 15%;
 }
 
 /* -- report ------------------------------------------------------------------------ */
@@ -548,11 +639,14 @@ table       { font-size: 100%; }
     # Heading
     #
 
-    # 添加显示截图的div  -- Gelomen
+    # 添加显示截图 和 饼状图 的div  -- Gelomen
     HEADING_TMPL = """<div class='pic_looper'></div> <div class='pic_show'><div class='pic_box'><img src=''/></div> </div>
 <div class='heading'>
-<h1 style="font-family: Microsoft YaHei">%(title)s</h1>
-%(parameters)s
+<div style="width: 700px ;float: left;">
+    <h1 style="font-family: Microsoft YaHei">%(title)s</h1>
+    %(parameters)s
+</div>
+<div id="container"></div>
 <p class='description'>%(description)s</p>
 </div>
 
@@ -900,13 +994,21 @@ class HTMLTestRunner(Template_mixin):
         report_attrs = self.getReportAttributes(result)
         generator = 'HTMLTestRunner %s' % __version__
         stylesheet = self._generate_stylesheet()
+        # 添加 通过、失败 和 错误 的统计，以用于饼图  -- Gelomen
+        Pass = self._generate_report(result)["Pass"]
+        fail = self._generate_report(result)["fail"]
+        error = self._generate_report(result)["error"]
+
         heading = self._generate_heading(report_attrs)
-        report = self._generate_report(result)
+        report = self._generate_report(result)["report"]
         ending = self._generate_ending()
         output = self.HTML_TMPL % dict(
             title=saxutils.escape(self.title),
             generator=generator,
             stylesheet=stylesheet,
+            Pass=Pass,
+            fail=fail,
+            error=error,
             heading=heading,
             report=report,
             ending=ending,
@@ -997,7 +1099,12 @@ class HTMLTestRunner(Template_mixin):
             time_usage=str(sum_ns) + "秒",  # 所有用例耗时
             passrate=self.passrate,
         )
-        return report
+
+        # 获取 通过、失败 和 错误 的统计并return，以用于饼图  -- Gelomen
+        Pass = str(result.success_count)
+        fail = str(result.failure_count)
+        error = str(result.error_count)
+        return {"report": report, "Pass": Pass, "fail": fail, "error": error}
 
     def _generate_report_test(self, rows, cid, tid, n, t, o, e):
         # e.g. 'pt1_1', 'ft1_1', 'et1_1'etc

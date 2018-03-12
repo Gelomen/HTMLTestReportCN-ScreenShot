@@ -7,6 +7,10 @@
 > * [boafantasy](https://github.com/boafantasy) 大神版本：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+Version 1.0.2 -- Gelomen
+* 新增测试结果统计饼图
+* 优化筛选时只显示预览
+
 Version 1.0.1 -- Gelomen
 * 修复报告存入文件夹的bug
 * 优化报告的命名方式
