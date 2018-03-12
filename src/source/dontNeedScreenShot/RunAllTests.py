@@ -10,7 +10,7 @@ class RunAllTests(object):
 
     def __init__(self):
         self.test_case_path = "."
-        self.title = "Test Report by Gelomen"
+        self.title = "Don't need screenshot report"
         self.description = "测试报告"
 
     def run(self):

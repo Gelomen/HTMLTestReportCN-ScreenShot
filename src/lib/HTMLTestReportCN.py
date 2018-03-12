@@ -359,6 +359,11 @@ class Template_mixin(object):
             credits: {
                 enabled: false
             },
+            navigation: {
+                buttonOptions: {
+                    enabled: false
+                }
+            },
             title: {
                 floating:true,
                 text: '测试结果占比'
