@@ -548,15 +548,7 @@ body        { font-family: Microsoft YaHei;padding: 20px; font-size: 100%; }
 table       { font-size: 100%; }
 
 /* -- heading ---------------------------------------------------------------------- */
-.heading {
-    margin-top: 0ex;
-    margin-bottom: 1ex;
-    float: left;
-}
-
 .heading .description {
-    margin-top: 4ex;
-    margin-bottom: 6ex;
     clear: both;
 }
 
@@ -647,7 +639,7 @@ table       { font-size: 100%; }
     # 添加显示截图 和 饼状图 的div  -- Gelomen
     HEADING_TMPL = """<div class='pic_looper'></div> <div class='pic_show'><div class='pic_box'><img src=''/></div> </div>
 <div class='heading'>
-<div style="width: 700px ;float: left;">
+<div style="width: auto; float: left;">
     <h1 style="font-family: Microsoft YaHei">%(title)s</h1>
     %(parameters)s
     <p class='description'>%(description)s</p>
