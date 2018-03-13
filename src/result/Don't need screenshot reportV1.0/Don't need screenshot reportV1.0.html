@@ -16,7 +16,7 @@ body        { font-family: Microsoft YaHei;padding: 20px; font-size: 100%; }
 table       { font-size: 100%; }
 
 /* -- heading ---------------------------------------------------------------------- */
-.heading .description {
+.heading .description, .attribute {
     clear: both;
 }
 
@@ -25,10 +25,10 @@ table       { font-size: 100%; }
     width: 100px;
     float: left;
 }
-.failCaseOl li {
+#failCaseOl li {
     color: red
 }
-.errorCaseOl li {
+#errorCaseOl li {
     color: orange
 }
 
@@ -137,12 +137,30 @@ table       { font-size: 100%; }
             $('.pic_show').fadeOut(200)
         });
         
-        // 改变窗口大小时，自动改变图片与顶部的距离  -- Gelomen
+        var browserWidth = $(window).width();
+        var margin_left = browserWidth/2 - 450;
+        if(margin_left <= 170){
+            $("#container").css("margin", "auto");
+        }else {
+            $("#container").css("margin-left", margin_left + "px");
+        }
+
         $(window).resize(function(){
+            // 改变窗口大小时，自动改变图片与顶部的距离  -- Gelomen
             var browserHeight = $(window).height();
             var pic_boxHeight = $(".pic_box").height();
             var top = (browserHeight - pic_boxHeight)/2;
-            $('.pic_box').css("margin-top", top + "px")
+            $('.pic_box').css("margin-top", top + "px");
+
+
+            // 改变窗口大小时，自动改变饼图的边距  -- Gelomen
+            var browserWidth = $(window).width();
+            var margin_left = browserWidth/2 - 450;
+            if(margin_left <= 170){
+                $("#container").css("margin", "auto");
+            }else {
+                $("#container").css("margin-left", margin_left + "px");
+            }
         });
 
         // 距离顶部超过浏览器窗口一屏时，回到顶部按钮才出现  -- Gelomen
@@ -231,6 +249,15 @@ table       { font-size: 100%; }
             });
             chart = c;
         });
+        
+        // 查看 失败 和 错误 合集链接文字切换  -- Gelomen
+        $(".showDetail").click(function () {
+            if($(this).html() == "点击查看"){
+                $(this).html("点击收起")
+            }else {
+                $(this).html("点击查看")
+            }
+        })
     });
     
     
@@ -342,23 +369,23 @@ function html_escape(s) {
 </script>
 <div class='pic_looper'></div> <div class='pic_show'><div class='pic_box'><img src=''/></div> </div>
 <div class='heading'>
-<div style="width: auto; float: left;">
+<div style="width: 580px; float: left;">
     <h1 style="font-family: Microsoft YaHei">Don't need screenshot report</h1>
     <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-03-13 00:08:30</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:00.000992</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-03-13 16:03:01</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:00.000984</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
-<p class='attribute'><strong>失败用例合集 : </strong> <ol class='failCaseOl' style='float: left; margin-right: 100px;'><li>test2 (Test.TestClass)</li></ol></p>
-<p class='attribute'><strong>错误用例合集 : </strong> <ol class='errorCaseOl' style='float: left; margin-right: 100px;'>无</ol></p>
+<p class='attribute'><strong>失败用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#failCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='failCaseOl' class='collapse' style='float: left;'><li>test2 (Test.TestClass)</li></ol></p>
+<p class='attribute'><strong>错误用例合集 : </strong> <ol style='float: left;'>无</ol></p>
 
     <p class='description'>测试报告</p>
 </div>
-</div>
 <div id="container"></div>
+</div>
 
 
 
-<div style="width: 500px;">
+<div style="width: 500px; clear: both;">
 <p id='show_detail_line'>
 <a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 50.00% }</a>
 <a class="btn btn-success" href='javascript:showCase(2)'>通过{ 1 }</a>
@@ -392,7 +419,7 @@ function html_escape(s) {
     <td class="text-center">1</td>
     <td class="text-center">1</td>
     <td class="text-center">0</td>
-    <td class="text-center">0.0秒</td>
+    <td class="text-center">0.01秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>详细</a></td>
 </tr>
 
@@ -415,7 +442,7 @@ function html_escape(s) {
         <pre style="text-align:left">
         
 ft1_2: Traceback (most recent call last):
-  File "F:\PycharmProject\HTMLTestReportCN_ScreenShot\src\source\dontNeedScreenShot\Test.py", line 25, in test2
+  File "E:\Gelomen\PycharmProjects\HTMLTestReportCN_ScreenShot\src\source\dontNeedScreenShot\Test.py", line 25, in test2
     self.assertEqual(self.a, self.b, "a ≠ b!")
 AssertionError: 1 != 2 : a ≠ b!
 
@@ -432,7 +459,7 @@ AssertionError: 1 != 2 : a ≠ b!
     <td>1</td>
     <td>1</td>
     <td>0</td>
-    <td>0.0秒</td>
+    <td>0.01秒</td>
     <td>通过率：50.00%</td>
 </tr>
 </table>

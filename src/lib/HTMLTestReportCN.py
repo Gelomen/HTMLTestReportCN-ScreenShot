@@ -324,6 +324,14 @@ class Template_mixin(object):
             $('.pic_show').fadeOut(200)
         });
         
+        var browserWidth = $(window).width();
+        var margin_left = browserWidth/2 - 450;
+        if(margin_left <= 170){
+            $("#container").css("margin", "auto");
+        }else {
+            $("#container").css("margin-left", margin_left + "px");
+        }
+
         $(window).resize(function(){
             // 改变窗口大小时，自动改变图片与顶部的距离  -- Gelomen
             var browserHeight = $(window).height();
@@ -335,8 +343,8 @@ class Template_mixin(object):
             // 改变窗口大小时，自动改变饼图的边距  -- Gelomen
             var browserWidth = $(window).width();
             var margin_left = browserWidth/2 - 450;
-            if(margin_left < 0){
-            $("#container").css("margin", "auto");
+            if(margin_left <= 170){
+                $("#container").css("margin", "auto");
             }else {
                 $("#container").css("margin-left", margin_left + "px");
             }
@@ -428,6 +436,15 @@ class Template_mixin(object):
             });
             chart = c;
         });
+        
+        // 查看 失败 和 错误 合集链接文字切换  -- Gelomen
+        $(".showDetail").click(function () {
+            if($(this).html() == "点击查看"){
+                $(this).html("点击收起")
+            }else {
+                $(this).html("点击查看")
+            }
+        })
     });
     
     
@@ -558,7 +575,7 @@ body        { font-family: Microsoft YaHei;padding: 20px; font-size: 100%; }
 table       { font-size: 100%; }
 
 /* -- heading ---------------------------------------------------------------------- */
-.heading .description {
+.heading .description, .attribute {
     clear: both;
 }
 
@@ -567,10 +584,10 @@ table       { font-size: 100%; }
     width: 100px;
     float: left;
 }
-.failCaseOl li {
+#failCaseOl li {
     color: red
 }
-.errorCaseOl li {
+#errorCaseOl li {
     color: orange
 }
 
@@ -649,13 +666,13 @@ table       { font-size: 100%; }
     # 添加显示截图 和 饼状图 的div  -- Gelomen
     HEADING_TMPL = """<div class='pic_looper'></div> <div class='pic_show'><div class='pic_box'><img src=''/></div> </div>
 <div class='heading'>
-<div style="width: auto; float: left;">
+<div style="width: 580px; float: left;">
     <h1 style="font-family: Microsoft YaHei">%(title)s</h1>
     %(parameters)s
     <p class='description'>%(description)s</p>
 </div>
-</div>
 <div id="container"></div>
+</div>
 
 """  # variables: (title, parameters, description)
 
@@ -1034,14 +1051,28 @@ class HTMLTestRunner(Template_mixin):
         for name, value in report_attrs:
             # 如果是 失败用例 或 错误用例合集，则不进行转义 -- Gelomen
             if name == "失败用例合集":
-                line = self.HEADING_ATTRIBUTE_TMPL % dict(
-                    name=name,
-                    value="<ol class='failCaseOl' style='float: left; margin-right: 100px;'>" + value + "</ol>",
+                if value == "无":
+                    line = self.HEADING_ATTRIBUTE_TMPL % dict(
+                        name=name,
+                        value="<ol style='float: left;'>" + value + "</ol>",
+                    )
+                else:
+                    line = self.HEADING_ATTRIBUTE_TMPL % dict(
+                        name=name,
+                        value="<div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#failCaseOl' style='text-decoration: none;'>点击查看</a></div>"
+                              "<ol id='failCaseOl' class='collapse' style='float: left;'>" + value + "</ol>",
                     )
             elif name == "错误用例合集":
-                line = self.HEADING_ATTRIBUTE_TMPL % dict(
-                    name=name,
-                    value="<ol class='errorCaseOl' style='float: left; margin-right: 100px;'>" + value + "</ol>",
+                if value == "无":
+                    line = self.HEADING_ATTRIBUTE_TMPL % dict(
+                        name=name,
+                        value="<ol style='float: left;'>" + value + "</ol>",
+                    )
+                else:
+                    line = self.HEADING_ATTRIBUTE_TMPL % dict(
+                        name=name,
+                        value="<div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#errorCaseOl' style='text-decoration: none;'>点击查看</a></div>"
+                              "<ol id='errorCaseOl' class='collapse' style='float: left;'>" + value + "</ol>",
                     )
             else:
                 line = self.HEADING_ATTRIBUTE_TMPL % dict(
