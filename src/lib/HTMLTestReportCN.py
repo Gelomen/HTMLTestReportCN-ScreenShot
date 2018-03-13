@@ -393,7 +393,7 @@ class Template_mixin(object):
                 pie: {
                     allowPointSelect: true,
                     cursor: 'pointer',
-                    colors: ['#81ca9d', '#fdc68c', '#f16d7e'],
+                    colors: ['#81ca9d', '#f16d7e', '#fdc68c'],
                     dataLabels: {
                         enabled: true,
                         format: '<b>{point.name}</b>: {point.percentage:.1f} %%',
@@ -418,13 +418,13 @@ class Template_mixin(object):
                 name: '比例',
                 data: [
                     ['通过', %(Pass)s],
-                    ['错误', %(error)s],
                     {
                         name: '失败',
                         y: %(fail)s,
                         sliced: true,
                         selected: true
-                    }
+                    },
+                    ['错误', %(error)s]
                 ]
             }]
         }, function(c) {

@@ -206,7 +206,7 @@ table       { font-size: 100%; }
                 pie: {
                     allowPointSelect: true,
                     cursor: 'pointer',
-                    colors: ['#81ca9d', '#fdc68c', '#f16d7e'],
+                    colors: ['#81ca9d', '#f16d7e', '#fdc68c'],
                     dataLabels: {
                         enabled: true,
                         format: '<b>{point.name}</b>: {point.percentage:.1f} %',
@@ -231,13 +231,13 @@ table       { font-size: 100%; }
                 name: '比例',
                 data: [
                     ['通过', 1],
-                    ['错误', 0],
                     {
                         name: '失败',
                         y: 1,
                         sliced: true,
                         selected: true
-                    }
+                    },
+                    ['错误', 0]
                 ]
             }]
         }, function(c) {
