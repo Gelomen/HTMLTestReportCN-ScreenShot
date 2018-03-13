@@ -326,7 +326,7 @@ class Template_mixin(object):
         
         var browserWidth = $(window).width();
         var margin_left = browserWidth/2 - 450;
-        if(margin_left <= 170){
+        if(margin_left <= 240){
             $("#container").css("margin", "auto");
         }else {
             $("#container").css("margin-left", margin_left + "px");
@@ -343,7 +343,7 @@ class Template_mixin(object):
             // 改变窗口大小时，自动改变饼图的边距  -- Gelomen
             var browserWidth = $(window).width();
             var margin_left = browserWidth/2 - 450;
-            if(margin_left <= 170){
+            if(margin_left <= 240){
                 $("#container").css("margin", "auto");
             }else {
                 $("#container").css("margin-left", margin_left + "px");
@@ -666,7 +666,7 @@ table       { font-size: 100%; }
     # 添加显示截图 和 饼状图 的div  -- Gelomen
     HEADING_TMPL = """<div class='pic_looper'></div> <div class='pic_show'><div class='pic_box'><img src=''/></div> </div>
 <div class='heading'>
-<div style="width: 580px; float: left;">
+<div style="width: 650px; float: left;">
     <h1 style="font-family: Microsoft YaHei">%(title)s</h1>
     %(parameters)s
     <p class='description'>%(description)s</p>

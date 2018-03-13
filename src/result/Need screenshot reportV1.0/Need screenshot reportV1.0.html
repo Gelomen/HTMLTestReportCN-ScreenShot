@@ -139,7 +139,7 @@ table       { font-size: 100%; }
         
         var browserWidth = $(window).width();
         var margin_left = browserWidth/2 - 450;
-        if(margin_left <= 170){
+        if(margin_left <= 240){
             $("#container").css("margin", "auto");
         }else {
             $("#container").css("margin-left", margin_left + "px");
@@ -156,7 +156,7 @@ table       { font-size: 100%; }
             // 改变窗口大小时，自动改变饼图的边距  -- Gelomen
             var browserWidth = $(window).width();
             var margin_left = browserWidth/2 - 450;
-            if(margin_left <= 170){
+            if(margin_left <= 240){
                 $("#container").css("margin", "auto");
             }else {
                 $("#container").css("margin-left", margin_left + "px");
@@ -369,11 +369,11 @@ function html_escape(s) {
 </script>
 <div class='pic_looper'></div> <div class='pic_show'><div class='pic_box'><img src=''/></div> </div>
 <div class='heading'>
-<div style="width: 580px; float: left;">
+<div style="width: 650px; float: left;">
     <h1 style="font-family: Microsoft YaHei">Need screenshot report</h1>
     <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-03-13 16:04:43</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:19.058078</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-03-13 16:50:26</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:18.780695</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
 <p class='attribute'><strong>失败用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#failCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='failCaseOl' class='collapse' style='float: left;'><li>test2_title (Test.TestClass)</li></ol></p>
 <p class='attribute'><strong>错误用例合集 : </strong> <ol style='float: left;'>无</ol></p>
@@ -419,7 +419,7 @@ function html_escape(s) {
     <td class="text-center">1</td>
     <td class="text-center">1</td>
     <td class="text-center">0</td>
-    <td class="text-center">19.06秒</td>
+    <td class="text-center">18.78秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>详细</a></td>
 </tr>
 
@@ -443,7 +443,7 @@ function html_escape(s) {
     
 ft1_2: errorImg[1.png]errorImg, browser[chrome(64.0.3282.186)]browser
 Traceback (most recent call last):
-  File "E:\Gelomen\PycharmProjects\HTMLTestReportCN_ScreenShot\src\source\needScreenShot\Test.py", line 30, in test2_title
+  File "E:\Gelomen\PycharmProjects\HTMLTestReportCN-ScreenShot\src\source\needScreenShot\Test.py", line 30, in test2_title
     self.assertEqual(title, "百度一下，你就知道!", "Title不一致！")
 AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
 - 百度一下，你就知道
@@ -464,7 +464,7 @@ AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
     <td>1</td>
     <td>1</td>
     <td>0</td>
-    <td>19.06秒</td>
+    <td>18.78秒</td>
     <td>通过率：50.00%</td>
 </tr>
 </table>
