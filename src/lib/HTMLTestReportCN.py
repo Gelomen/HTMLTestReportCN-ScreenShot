@@ -324,12 +324,22 @@ class Template_mixin(object):
             $('.pic_show').fadeOut(200)
         });
         
-        // 改变窗口大小时，自动改变图片与顶部的距离  -- Gelomen
         $(window).resize(function(){
+            // 改变窗口大小时，自动改变图片与顶部的距离  -- Gelomen
             var browserHeight = $(window).height();
             var pic_boxHeight = $(".pic_box").height();
             var top = (browserHeight - pic_boxHeight)/2;
-            $('.pic_box').css("margin-top", top + "px")
+            $('.pic_box').css("margin-top", top + "px");
+
+
+            // 改变窗口大小时，自动改变饼图的边距  -- Gelomen
+            var browserWidth = $(window).width();
+            var margin_left = browserWidth/2 - 450;
+            if(margin_left < 0){
+            $("#container").css("margin", "auto");
+            }else {
+                $("#container").css("margin-left", margin_left + "px");
+            }
         });
 
         // 距离顶部超过浏览器窗口一屏时，回到顶部按钮才出现  -- Gelomen
@@ -657,7 +667,7 @@ table       { font-size: 100%; }
     #
     # 汉化,加美化效果 --Findyou
     REPORT_TMPL = """
-<div style="width: 500px;">
+<div style="width: 500px; clear: both;">
 <p id='show_detail_line'>
 <a class="btn btn-primary" href='javascript:showCase(0)'>概要{ %(passrate)s }</a>
 <a class="btn btn-success" href='javascript:showCase(2)'>通过{ %(Pass)s }</a>
