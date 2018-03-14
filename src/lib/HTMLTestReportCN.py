@@ -67,11 +67,14 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
 __author__ = "Wai Yip Tung,  Findyou,  boafantasy,  Gelomen"
-__version__ = "1.0.2"
+__version__ = "1.1.0"
 
 
 """
 Change History
+Version 1.1.0 -- Gelomen
+* 优化报告截图写入方式
+
 Version 1.0.2 -- Gelomen
 * 新增测试结果统计饼图
 * 优化筛选时只显示预览
@@ -923,13 +926,13 @@ class _TestResult(TestResult):
         self.failCase += "<li>" + str(test) + "</li>"
 
 
-# 新增 need_screenshot 参数，0为无需截图，1为需要截图  -- Gelomen
+# 新增 need_screenshot 参数，-1为无需截图，否则需要截图  -- Gelomen
 class HTMLTestRunner(Template_mixin):
     """
     """
 
-    def __init__(self, stream=sys.stdout, verbosity=2, need_screenshot=None, title=None, description=None, tester=None):
-        self.need_screenshot = need_screenshot
+    def __init__(self, stream=sys.stdout, verbosity=2, title=None, description=None, tester=None):
+        self.need_screenshot = 0
         self.stream = stream
         self.verbosity = verbosity
         if title is None:
@@ -1160,10 +1163,6 @@ class HTMLTestRunner(Template_mixin):
         name = t.id().split('.')[-1]
         doc = t.shortDescription() or ""
         desc = doc and ('%s: %s' % (name, doc)) or name
-        if self.need_screenshot >= 1:
-            tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_1 or self.REPORT_TEST_NO_OUTPUT_TMPL
-        else:
-            tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_0 or self.REPORT_TEST_NO_OUTPUT_TMPL
 
         # utf-8 支持中文 - Findyou
         # o and e should be byte string because they are collected from stdout and stderr?
@@ -1187,9 +1186,25 @@ class HTMLTestRunner(Template_mixin):
             output=saxutils.escape(uo + ue),
         )
 
-        if self.need_screenshot >= 1:
-            # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字  -- Gelomen
-            u = uo + ue
+        # 截图名字通过抛出异常存放在u，通过截取字段获得截图名字  -- Gelomen
+        u = uo + ue
+        # 先判断是否需要截图
+        self.need_screenshot = u.find("errorImg[")
+
+        if self.need_screenshot == -1:
+            tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_0 or self.REPORT_TEST_NO_OUTPUT_TMPL
+
+            row = tmpl % dict(
+                tid=tid,
+                Class=(n == 0 and 'hiddenRow' or 'none'),
+                style=n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'passCase'),
+                desc=desc,
+                script=script,
+                status=self.STATUS[n],
+            )
+        else:
+            tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_1 or self.REPORT_TEST_NO_OUTPUT_TMPL
+
             screenshot = u[u.find('errorImg[') + 9:u.find(']errorImg')]
             browser = u[u.find('browser[') + 8:u.find(']browser')]
 
@@ -1204,15 +1219,6 @@ class HTMLTestRunner(Template_mixin):
                 screenshot=screenshot,
                 # 添加浏览器版本字段
                 browser=browser
-            )
-        else:
-            row = tmpl % dict(
-                tid=tid,
-                Class=(n == 0 and 'hiddenRow' or 'none'),
-                style=n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'passCase'),
-                desc=desc,
-                script=script,
-                status=self.STATUS[n],
             )
         rows.append(row)
 

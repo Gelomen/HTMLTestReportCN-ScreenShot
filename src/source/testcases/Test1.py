@@ -19,14 +19,24 @@ class TestClass(unittest.TestCase):
 
     def test1_find_input(self):
         try:
-            self.browser.find_element_by_xpath("//input[@id='kw']")
+            # 正确值为 //input[@id='kw']
+            self.browser.find_element_by_xpath("//input[@id='kw1']")
         except Exception:
             self.daf.get_screenshot(self.browser)
             raise
 
-    def test2_title(self):
+    def test2_assert_equal(self):
+        a = 1
+        b = 2
+        try:
+            self.assertEqual(a, b, "a ≠ b!")
+        except AssertionError:
+            raise
+
+    def test3_title(self):
         title = self.browser.title
         try:
+            # 加了个感叹号 ！
             self.assertEqual(title, "百度一下，你就知道!", "Title不一致！")
         except AssertionError:
             self.daf.get_screenshot(self.browser)

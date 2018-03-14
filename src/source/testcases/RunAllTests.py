@@ -10,7 +10,7 @@ class RunAllTests(object):
 
     def __init__(self):
         self.test_case_path = "."
-        self.title = "Need screenshot report"
+        self.title = "自动化测试报告"
         self.description = "测试报告"
 
     def run(self):
@@ -23,8 +23,7 @@ class RunAllTests(object):
 
         fp = open(report_path, "wb")
 
-        # need_screenshot = 1，表示是UI自动化测试，需执行截图
-        runner = HTMLTestReportCN.HTMLTestRunner(stream=fp, need_screenshot=1, title=self.title, description=self.description, tester=input("请输入你的名字："))
+        runner = HTMLTestReportCN.HTMLTestRunner(stream=fp, title=self.title, description=self.description, tester=input("请输入你的名字："))
         runner.run(test_suite)
         fp.close()
 

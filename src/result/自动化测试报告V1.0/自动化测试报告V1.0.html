@@ -2,8 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Need screenshot report</title>
-    <meta name="generator" content="HTMLTestRunner 1.0.2"/>
+    <title>自动化测试报告</title>
+    <meta name="generator" content="HTMLTestRunner 1.1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
@@ -233,11 +233,11 @@ table       { font-size: 100%; }
                     ['通过', 1],
                     {
                         name: '失败',
-                        y: 1,
+                        y: 3,
                         sliced: true,
                         selected: true
                     },
-                    ['错误', 0]
+                    ['错误', 1]
                 ]
             }]
         }, function(c) {
@@ -370,13 +370,13 @@ function html_escape(s) {
 <div class='pic_looper'></div> <div class='pic_show'><div class='pic_box'><img src=''/></div> </div>
 <div class='heading'>
 <div style="width: 650px; float: left;">
-    <h1 style="font-family: Microsoft YaHei">Need screenshot report</h1>
+    <h1 style="font-family: Microsoft YaHei">自动化测试报告</h1>
     <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-03-13 16:50:26</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:18.780695</p>
-<p class='attribute'><strong>测试结果 : </strong> 共 2，通过 1，失败 1，通过率 = 50.00%</p>
-<p class='attribute'><strong>失败用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#failCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='failCaseOl' class='collapse' style='float: left;'><li>test2_title (Test.TestClass)</li></ol></p>
-<p class='attribute'><strong>错误用例合集 : </strong> <ol style='float: left;'>无</ol></p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-03-14 20:44:42</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:37.442644</p>
+<p class='attribute'><strong>测试结果 : </strong> 共 5，通过 1，失败 3，错误 1，通过率 = 20.00%</p>
+<p class='attribute'><strong>失败用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#failCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='failCaseOl' class='collapse' style='float: left;'><li>test2_assert_equal (Test1.TestClass)</li><li>test3_title (Test1.TestClass)</li><li>test2 (Test2.TestClass)</li></ol></p>
+<p class='attribute'><strong>错误用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#errorCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='errorCaseOl' class='collapse' style='float: left;'><li>test1_find_input (Test1.TestClass)</li></ol></p>
 
     <p class='description'>测试报告</p>
 </div>
@@ -387,11 +387,11 @@ function html_escape(s) {
 
 <div style="width: 500px; clear: both;">
 <p id='show_detail_line'>
-<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 50.00% }</a>
+<a class="btn btn-primary" href='javascript:showCase(0)'>概要{ 20.00% }</a>
 <a class="btn btn-success" href='javascript:showCase(2)'>通过{ 1 }</a>
-<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 1 }</a>
-<a class="btn btn-warning" href='javascript:showCase(3)'>错误{ 0 }</a>
-<a class="btn btn-info" href='javascript:showCase(4)'>所有{ 2 }</a>
+<a class="btn btn-danger" href='javascript:showCase(1)'>失败{ 3 }</a>
+<a class="btn btn-warning" href='javascript:showCase(3)'>错误{ 1 }</a>
+<a class="btn btn-info" href='javascript:showCase(4)'>所有{ 5 }</a>
 </p>
 </div>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
@@ -413,37 +413,91 @@ function html_escape(s) {
     <td>详细</td>
 </tr>
 
-<tr class='failClass warning'>
-    <td>Test.TestClass</td>
+<tr class='errorClass warning'>
+    <td>Test1.TestClass</td>
+    <td class="text-center">3</td>
+    <td class="text-center">0</td>
     <td class="text-center">2</td>
     <td class="text-center">1</td>
-    <td class="text-center">1</td>
-    <td class="text-center">0</td>
-    <td class="text-center">18.78秒</td>
-    <td class="text-center"><a href="javascript:showClassDetail('c1',2)" class="detail" id='c1'>详细</a></td>
+    <td class="text-center">37.44秒</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c1',3)" class="detail" id='c1'>详细</a></td>
 </tr>
 
-<tr id='pt1_1' class='hiddenRow'>
-    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test1_find_input</div></td>
-    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
-    <td class='passCase' style="vertical-align: middle"></td>
-</tr>
-
-<tr id='ft1_2' class='none'>
-    <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2_title</div></td>
+<tr id='et1_1' class='none'>
+    <td class='errorCase' style="vertical-align: middle"><div class='testcase'>test1_find_input</div></td>
     <td colspan='5' align='center'>
     <!--默认收起错误信息 -Findyou
-    <button id='btn_ft1_2' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
-    <div id='div_ft1_2' class="collapse">  -->
+    <button id='btn_et1_1' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_et1_1'>错误</button>
+    <div id='div_et1_1' class="collapse">  -->
 
     <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
-    <button id='btn_ft1_2' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_ft1_2,#div_ft1_2_screenshot'>失败</button>
-    <div id='div_ft1_2' class="collapse in">
+    <button id='btn_et1_1' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_et1_1,#div_et1_1_screenshot'>错误</button>
+    <div id='div_et1_1' class="collapse in">
     <pre style="text-align:left">
     
-ft1_2: errorImg[1.png]errorImg, browser[chrome(64.0.3282.186)]browser
+et1_1: errorImg[1.png]errorImg, browser[chrome(63.0.3239.132)]browser
 Traceback (most recent call last):
-  File "E:\Gelomen\PycharmProjects\HTMLTestReportCN-ScreenShot\src\source\needScreenShot\Test.py", line 30, in test2_title
+  File "F:\PycharmProject\HTMLTestReportCN-ScreenShot\src\source\testcases\Test1.py", line 23, in test1_find_input
+    self.browser.find_element_by_xpath("//input[@id='kw1']")
+  File "F:\PycharmProject\HTMLTestReportCN-ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 385, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "F:\PycharmProject\HTMLTestReportCN-ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 955, in find_element
+    'value': value})['value']
+  File "F:\PycharmProject\HTMLTestReportCN-ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+    self.error_handler.check_response(response)
+  File "F:\PycharmProject\HTMLTestReportCN-ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//input[@id='kw1']"}
+  (Session info: chrome=63.0.3239.132)
+  (Driver info: chromedriver=2.35.528161 (5b82f2d2aae0ca24b877009200ced9065a772e73),platform=Windows NT 10.0.16299 x86_64)
+
+
+
+    </pre>
+    </div>
+    </td>
+    <td class="text-center" style="vertical-align: middle"><div id='div_et1_1_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">chrome(63.0.3239.132)</div></br>截图：<a class="screenshot" href="javascript:void(0)" img="image/1.png">img_1.png</a></div></td>
+</tr>
+
+    <tr id='ft1_2' class='none'>
+        <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2_assert_equal</div></td>
+        <td colspan='5' align='center'>
+        <!--默认收起错误信息 -Findyou
+        <button id='btn_ft1_2' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+        <div id='div_ft1_2' class="collapse">  -->
+
+        <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
+        <button id='btn_ft1_2' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
+        <div id='div_ft1_2' class="collapse in">
+        <pre style="text-align:left">
+        
+ft1_2: Traceback (most recent call last):
+  File "F:\PycharmProject\HTMLTestReportCN-ScreenShot\src\source\testcases\Test1.py", line 32, in test2_assert_equal
+    self.assertEqual(a, b, "a ≠ b!")
+AssertionError: 1 != 2 : a ≠ b!
+
+
+        </pre>
+        </div>
+        </td>
+        <td class='failCase' style="vertical-align: middle"></td>
+    </tr>
+    
+<tr id='ft1_3' class='none'>
+    <td class='failCase' style="vertical-align: middle"><div class='testcase'>test3_title</div></td>
+    <td colspan='5' align='center'>
+    <!--默认收起错误信息 -Findyou
+    <button id='btn_ft1_3' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>失败</button>
+    <div id='div_ft1_3' class="collapse">  -->
+
+    <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
+    <button id='btn_ft1_3' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_ft1_3,#div_ft1_3_screenshot'>失败</button>
+    <div id='div_ft1_3' class="collapse in">
+    <pre style="text-align:left">
+    
+ft1_3: errorImg[2.png]errorImg, browser[chrome(63.0.3239.132)]browser
+Traceback (most recent call last):
+  File "F:\PycharmProject\HTMLTestReportCN-ScreenShot\src\source\testcases\Test1.py", line 40, in test3_title
     self.assertEqual(title, "百度一下，你就知道!", "Title不一致！")
 AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
 - 百度一下，你就知道
@@ -455,17 +509,57 @@ AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
     </pre>
     </div>
     </td>
-    <td class="text-center" style="vertical-align: middle"><div id='div_ft1_2_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">chrome(64.0.3282.186)</div></br>截图：<a class="screenshot" href="javascript:void(0)" img="image/1.png">img_1.png</a></div></td>
+    <td class="text-center" style="vertical-align: middle"><div id='div_ft1_3_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">chrome(63.0.3239.132)</div></br>截图：<a class="screenshot" href="javascript:void(0)" img="image/2.png">img_2.png</a></div></td>
 </tr>
 
+<tr class='failClass warning'>
+    <td>Test2.TestClass</td>
+    <td class="text-center">2</td>
+    <td class="text-center">1</td>
+    <td class="text-center">1</td>
+    <td class="text-center">0</td>
+    <td class="text-center">0.0秒</td>
+    <td class="text-center"><a href="javascript:showClassDetail('c2',2)" class="detail" id='c2'>详细</a></td>
+</tr>
+
+<tr id='pt2_1' class='hiddenRow'>
+    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test1</div></td>
+    <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
+    <td class='passCase' style="vertical-align: middle"></td>
+</tr>
+
+    <tr id='ft2_2' class='none'>
+        <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2</div></td>
+        <td colspan='5' align='center'>
+        <!--默认收起错误信息 -Findyou
+        <button id='btn_ft2_2' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_2'>失败</button>
+        <div id='div_ft2_2' class="collapse">  -->
+
+        <!-- 默认展开错误信息 -Findyou /  修复失败按钮的颜色 -- Gelomen -->
+        <button id='btn_ft2_2' type="button"  class="btn btn-xs" data-toggle="collapse" data-target='#div_ft2_2'>失败</button>
+        <div id='div_ft2_2' class="collapse in">
+        <pre style="text-align:left">
+        
+ft2_2: Traceback (most recent call last):
+  File "F:\PycharmProject\HTMLTestReportCN-ScreenShot\src\source\testcases\Test2.py", line 25, in test2
+    self.assertEqual(self.a, self.b, "a ≠ b!")
+AssertionError: 1 != 2 : a ≠ b!
+
+
+        </pre>
+        </div>
+        </td>
+        <td class='failCase' style="vertical-align: middle"></td>
+    </tr>
+    
 <tr id='total_row' class="text-center active">
     <td>总计</td>
-    <td>2</td>
+    <td>5</td>
     <td>1</td>
+    <td>3</td>
     <td>1</td>
-    <td>0</td>
-    <td>18.78秒</td>
-    <td>通过率：50.00%</td>
+    <td>37.44秒</td>
+    <td>通过率：20.00%</td>
 </tr>
 </table>
 
