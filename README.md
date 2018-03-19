@@ -91,14 +91,14 @@ Version in 0.7.1
 * Fix missing scroll bars in detail log (Podi).
 
 ## 步骤
-#### 1. 初始化
+#### 1. 初始化（若无需截图，则跳过此步骤）
 unittest框架，`setup()` 初始化 `DirAndFiles()`
 ```python
 def setUp(self):
     ...
     self.daf = DirAndFiles()
 ```
-#### 2. 执行截图和获取截图名字
+#### 2. 执行截图和获取截图名字（若无需截图，则跳过此步骤）
 测试用例的断言操作，在抛出的Exception里执行截图操作，截图名字通过 `print()` 出来跟随异常一起抛出，**注意：截图方法用的是selenium的，如需用其他方法截图，请自行到 `HTMLTestReportCN.py` 修改 `get_screenshot()` 方法**，调用该方法则自动把截图附加到报告里。
 ```python
 def test1_find_input(self):
