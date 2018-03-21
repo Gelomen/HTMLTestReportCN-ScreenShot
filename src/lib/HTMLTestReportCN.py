@@ -1288,7 +1288,7 @@ class DirAndFiles(object):
         browser.get_screenshot_as_file(img_path)
         img_name = str(i) + ".png"
 
-        browser_type = str(browser).split(".")[2]
+        browser_type = browser.capabilities["browserName"]
         browser_version = browser.capabilities["version"]
         browser_msg = browser_type + "(" + browser_version + ")"
 
