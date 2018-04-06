@@ -8,6 +8,7 @@ from src.lib.HTMLTestReportCN import DirAndFiles
 
 
 class TestClass(unittest.TestCase):
+    """ UI自动化测试 """
 
     def setUp(self):
         self.browser = webdriver.Chrome(executable_path="../../lib/chromedriver.exe")

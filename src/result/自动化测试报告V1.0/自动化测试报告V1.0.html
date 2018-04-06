@@ -372,8 +372,8 @@ function html_escape(s) {
 <div style="width: 650px; float: left;">
     <h1 style="font-family: Microsoft YaHei">自动化测试报告</h1>
     <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-04-06 13:58:57</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:24.598673</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-04-06 14:23:28</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:24.690086</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 5，通过 1，失败 3，错误 1，通过率 = 20.00%</p>
 <p class='attribute'><strong>失败用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#failCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='failCaseOl' class='collapse' style='float: left;'><li>test2_assert_equal (Test1.TestClass)</li><li>test3_title (Test1.TestClass)</li><li>test2 (Test2.TestClass)</li></ol></p>
 <p class='attribute'><strong>错误用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#errorCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='errorCaseOl' class='collapse' style='float: left;'><li>test1_find_input (Test1.TestClass)</li></ol></p>
@@ -414,12 +414,12 @@ function html_escape(s) {
 </tr>
 
 <tr class='errorClass warning'>
-    <td>Test1.TestClass</td>
+    <td>Test1.TestClass -  UI自动化测试 </td>
     <td class="text-center">3</td>
     <td class="text-center">0</td>
     <td class="text-center">2</td>
     <td class="text-center">1</td>
-    <td class="text-center">24.6秒</td>
+    <td class="text-center">24.69秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c1',3)" class="detail" id='c1'>详细</a></td>
 </tr>
 
@@ -437,15 +437,15 @@ function html_escape(s) {
     
 et1_1: errorImg[1.png]errorImg, browser[chrome(63.0.3239.132)]browser
 Traceback (most recent call last):
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\src\source\testcases\Test1.py", line 24, in test1_find_input
+  File "G:\PycharmProject\HTMLTestReportCN-ScreenShot\src\source\testcases\Test1.py", line 25, in test1_find_input
     self.browser.find_element_by_xpath("//input[@id='kw1']")
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 385, in find_element_by_xpath
+  File "G:\PycharmProject\HTMLTestReportCN-ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 385, in find_element_by_xpath
     return self.find_element(by=By.XPATH, value=xpath)
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 955, in find_element
+  File "G:\PycharmProject\HTMLTestReportCN-ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 955, in find_element
     'value': value})['value']
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
+  File "G:\PycharmProject\HTMLTestReportCN-ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 312, in execute
     self.error_handler.check_response(response)
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+  File "G:\PycharmProject\HTMLTestReportCN-ScreenShot\venv\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
     raise exception_class(message, screen, stacktrace)
 selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"xpath","selector":"//input[@id='kw1']"}
   (Session info: chrome=63.0.3239.132)
@@ -472,7 +472,7 @@ selenium.common.exceptions.NoSuchElementException: Message: no such element: Una
         <pre style="text-align:left">
         
 ft1_2: Traceback (most recent call last):
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\src\source\testcases\Test1.py", line 34, in test2_assert_equal
+  File "G:\PycharmProject\HTMLTestReportCN-ScreenShot\src\source\testcases\Test1.py", line 35, in test2_assert_equal
     self.assertEqual(a, b, "a ≠ b!")
 AssertionError: 1 != 2 : a ≠ b!
 
@@ -497,7 +497,7 @@ AssertionError: 1 != 2 : a ≠ b!
     
 ft1_3: errorImg[2.png]errorImg, browser[chrome(63.0.3239.132)]browser
 Traceback (most recent call last):
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\src\source\testcases\Test1.py", line 43, in test3_title
+  File "G:\PycharmProject\HTMLTestReportCN-ScreenShot\src\source\testcases\Test1.py", line 44, in test3_title
     self.assertEqual(title, "百度一下，你就知道!", "Title不一致！")
 AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
 - 百度一下，你就知道
@@ -513,7 +513,7 @@ AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
 </tr>
 
 <tr class='failClass warning'>
-    <td>Test2.TestClass</td>
+    <td>Test2.TestClass -  数据自动化测试 </td>
     <td class="text-center">2</td>
     <td class="text-center">1</td>
     <td class="text-center">1</td>
@@ -541,7 +541,7 @@ AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
         <pre style="text-align:left">
         
 ft2_2: Traceback (most recent call last):
-  File "G:\PycharmProject\HTMLTestReportCN_ScreenShot\src\source\testcases\Test2.py", line 27, in test2
+  File "G:\PycharmProject\HTMLTestReportCN-ScreenShot\src\source\testcases\Test2.py", line 28, in test2
     self.assertEqual(self.a, self.b, "a ≠ b!")
 AssertionError: 1 != 2 : a ≠ b!
 
@@ -558,7 +558,7 @@ AssertionError: 1 != 2 : a ≠ b!
     <td>1</td>
     <td>3</td>
     <td>1</td>
-    <td>24.6秒</td>
+    <td>24.69秒</td>
     <td>通过率：20.00%</td>
 </tr>
 </table>

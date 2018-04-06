@@ -6,6 +6,7 @@ import unittest
 
 
 class TestClass(unittest.TestCase):
+    """ 数据自动化测试 """
 
     def setUp(self):
         self.a = 1
