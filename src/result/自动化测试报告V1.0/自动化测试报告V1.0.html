@@ -372,8 +372,8 @@ function html_escape(s) {
 <div style="width: 650px; float: left;">
     <h1 style="font-family: Microsoft YaHei">自动化测试报告</h1>
     <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-04-06 14:23:28</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:24.690086</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-04-06 19:11:44</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:25.417817</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 5，通过 1，失败 3，错误 1，通过率 = 20.00%</p>
 <p class='attribute'><strong>失败用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#failCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='failCaseOl' class='collapse' style='float: left;'><li>test2_assert_equal (Test1.TestClass)</li><li>test3_title (Test1.TestClass)</li><li>test2 (Test2.TestClass)</li></ol></p>
 <p class='attribute'><strong>错误用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#errorCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='errorCaseOl' class='collapse' style='float: left;'><li>test1_find_input (Test1.TestClass)</li></ol></p>
@@ -405,6 +405,7 @@ function html_escape(s) {
 </colgroup>
 <tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
     <td>用例集/测试用例</td>
+    <td>说明</td>
     <td>总计</td>
     <td>通过</td>
     <td>失败</td>
@@ -414,17 +415,19 @@ function html_escape(s) {
 </tr>
 
 <tr class='errorClass warning'>
-    <td>Test1.TestClass -  UI自动化测试 </td>
+    <td>Test1.TestClass</td>
+    <td> UI自动化测试 </td>
     <td class="text-center">3</td>
     <td class="text-center">0</td>
     <td class="text-center">2</td>
     <td class="text-center">1</td>
-    <td class="text-center">24.69秒</td>
+    <td class="text-center">25.41秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c1',3)" class="detail" id='c1'>详细</a></td>
 </tr>
 
 <tr id='et1_1' class='none'>
-    <td class='errorCase' style="vertical-align: middle"><div class='testcase'>test1_find_input - UI自动化测试1</div></td>
+    <td class='errorCase' style="vertical-align: middle"><div class='testcase'>test1_find_input</div></td>
+    <td style="vertical-align: middle">UI自动化测试1</td>
     <td colspan='5' align='center'>
     <!--默认收起错误信息 -Findyou
     <button id='btn_et1_1' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_et1_1'>错误</button>
@@ -460,7 +463,8 @@ selenium.common.exceptions.NoSuchElementException: Message: no such element: Una
 </tr>
 
     <tr id='ft1_2' class='none'>
-        <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2_assert_equal - UI自动化测试2</div></td>
+        <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2_assert_equal</div></td>
+        <td style="vertical-align: middle">UI自动化测试2</td>
         <td colspan='5' align='center'>
         <!--默认收起错误信息 -Findyou
         <button id='btn_ft1_2' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_2'>失败</button>
@@ -484,7 +488,8 @@ AssertionError: 1 != 2 : a ≠ b!
     </tr>
     
 <tr id='ft1_3' class='none'>
-    <td class='failCase' style="vertical-align: middle"><div class='testcase'>test3_title - UI自动化测试3</div></td>
+    <td class='failCase' style="vertical-align: middle"><div class='testcase'>test3_title</div></td>
+    <td style="vertical-align: middle">UI自动化测试3</td>
     <td colspan='5' align='center'>
     <!--默认收起错误信息 -Findyou
     <button id='btn_ft1_3' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft1_3'>失败</button>
@@ -513,23 +518,26 @@ AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
 </tr>
 
 <tr class='failClass warning'>
-    <td>Test2.TestClass -  数据自动化测试 </td>
+    <td>Test2.TestClass</td>
+    <td> 数据自动化测试 </td>
     <td class="text-center">2</td>
     <td class="text-center">1</td>
     <td class="text-center">1</td>
     <td class="text-center">0</td>
-    <td class="text-center">0.0秒</td>
+    <td class="text-center">0.01秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c2',2)" class="detail" id='c2'>详细</a></td>
 </tr>
 
 <tr id='pt2_1' class='hiddenRow'>
-    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test1 - 数据验证1</div></td>
+    <td class='passCase' style="vertical-align: middle"><div class='testcase'>test1</div></td>
+    <td style="vertical-align: left">数据验证1</td>
     <td colspan='5' align='center'><span class="label label-success success">通过</span></td>
     <td class='passCase' style="vertical-align: middle"></td>
 </tr>
 
     <tr id='ft2_2' class='none'>
-        <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2 - 数据验证2</div></td>
+        <td class='failCase' style="vertical-align: middle"><div class='testcase'>test2</div></td>
+        <td style="vertical-align: middle">数据验证2</td>
         <td colspan='5' align='center'>
         <!--默认收起错误信息 -Findyou
         <button id='btn_ft2_2' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_ft2_2'>失败</button>
@@ -553,12 +561,12 @@ AssertionError: 1 != 2 : a ≠ b!
     </tr>
     
 <tr id='total_row' class="text-center active">
-    <td>总计</td>
+    <td colspan='2'>总计</td>
     <td>5</td>
     <td>1</td>
     <td>3</td>
     <td>1</td>
-    <td>24.69秒</td>
+    <td>25.42秒</td>
     <td>通过率：20.00%</td>
 </tr>
 </table>

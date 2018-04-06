@@ -73,7 +73,7 @@ __version__ = "1.2.0"
 """
 Change History
 Version 1.2.0 -- Gelomen
-* 优化用例描述显示
+* 优化用例说明显示
 * 错误和失败报告里可以放入多张截图
 
 Version 1.1.0 -- Gelomen
@@ -712,6 +712,7 @@ table       { font-size: 100%; }
 </colgroup>
 <tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
     <td>用例集/测试用例</td>
+    <td>说明</td>
     <td>总计</td>
     <td>通过</td>
     <td>失败</td>
@@ -721,7 +722,7 @@ table       { font-size: 100%; }
 </tr>
 %(test_list)s
 <tr id='total_row' class="text-center active">
-    <td>总计</td>
+    <td colspan='2'>总计</td>
     <td>%(count)s</td>
     <td>%(Pass)s</td>
     <td>%(fail)s</td>
@@ -734,7 +735,8 @@ table       { font-size: 100%; }
 
     REPORT_CLASS_TMPL = r"""
 <tr class='%(style)s warning'>
-    <td>%(desc)s</td>
+    <td>%(name)s</td>
+    <td>%(doc)s</td>
     <td class="text-center">%(count)s</td>
     <td class="text-center">%(Pass)s</td>
     <td class="text-center">%(fail)s</td>
@@ -747,7 +749,8 @@ table       { font-size: 100%; }
     # 失败 的样式，去掉原来JS效果，美化展示效果  -Findyou / 美化类名上下居中，有截图列 -- Gelomen
     REPORT_TEST_WITH_OUTPUT_TMPL_1 = r"""
 <tr id='%(tid)s' class='%(Class)s'>
-    <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(desc)s</div></td>
+    <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(name)s</div></td>
+    <td style="vertical-align: middle">%(doc)s</td>
     <td colspan='5' align='center'>
     <!--默认收起错误信息 -Findyou
     <button id='btn_%(tid)s' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_%(tid)s'>%(status)s</button>
@@ -768,7 +771,8 @@ table       { font-size: 100%; }
     # 失败 的样式，去掉原来JS效果，美化展示效果  -Findyou / 美化类名上下居中，无截图列 -- Gelomen
     REPORT_TEST_WITH_OUTPUT_TMPL_0 = r"""
     <tr id='%(tid)s' class='%(Class)s'>
-        <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(desc)s</div></td>
+        <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(name)s</div></td>
+        <td style="vertical-align: middle">%(doc)s</td>
         <td colspan='5' align='center'>
         <!--默认收起错误信息 -Findyou
         <button id='btn_%(tid)s' type="button"  class="btn btn-xs collapsed" data-toggle="collapse" data-target='#div_%(tid)s'>%(status)s</button>
@@ -789,7 +793,8 @@ table       { font-size: 100%; }
     # 通过 的样式，加标签效果  -Findyou / 美化类名上下居中 -- Gelomen
     REPORT_TEST_NO_OUTPUT_TMPL = r"""
 <tr id='%(tid)s' class='%(Class)s'>
-    <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(desc)s</div></td>
+    <td class='%(style)s' style="vertical-align: middle"><div class='testcase'>%(name)s</div></td>
+    <td style="vertical-align: left">%(doc)s</td>
     <td colspan='5' align='center'><span class="label label-success success">%(status)s</span></td>
     <td class='%(style)s' style="vertical-align: middle"></td>
 </tr>
@@ -1121,11 +1126,12 @@ class HTMLTestRunner(Template_mixin):
             else:
                 name = "%s.%s" % (cls.__module__, cls.__name__)
             doc = cls.__doc__ and cls.__doc__.split("\n")[0] or ""
-            desc = doc and '%s - %s' % (name, doc) or name
+            # desc = doc and '%s - %s' % (name, doc) or name
 
             row = self.REPORT_CLASS_TMPL % dict(
                 style=ne > 0 and 'errorClass' or nf > 0 and 'failClass' or 'passClass',
-                desc=desc,
+                name=name,
+                doc=doc,
                 count=np + nf + ne,
                 Pass=np,
                 fail=nf,
@@ -1167,7 +1173,7 @@ class HTMLTestRunner(Template_mixin):
         tid = tid_flag + 't%s_%s' % (cid + 1, tid + 1)
         name = t.id().split('.')[-1]
         doc = t.shortDescription() or ""
-        desc = doc and ('%s - %s' % (name, doc)) or name
+        # desc = doc and ('%s - %s' % (name, doc)) or name
 
         # utf-8 支持中文 - Findyou
         # o and e should be byte string because they are collected from stdout and stderr?
@@ -1203,7 +1209,8 @@ class HTMLTestRunner(Template_mixin):
                 tid=tid,
                 Class=(n == 0 and 'hiddenRow' or 'none'),
                 style=n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'passCase'),
-                desc=desc,
+                name=name,
+                doc=doc,
                 script=script,
                 status=self.STATUS[n],
             )
@@ -1222,7 +1229,8 @@ class HTMLTestRunner(Template_mixin):
                 tid=tid,
                 Class=(n == 0 and 'hiddenRow' or 'none'),
                 style=n == 2 and 'errorCase' or (n == 1 and 'failCase' or 'passCase'),
-                desc=desc,
+                name=name,
+                doc=doc,
                 script=script,
                 status=self.STATUS[n],
                 # 添加截图字段
