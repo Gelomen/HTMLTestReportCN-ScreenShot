@@ -67,11 +67,15 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # URL: https://github.com/Gelomen/HTMLTestReportCN-ScreenShot
 
 __author__ = "Wai Yip Tung,  Findyou,  boafantasy,  Gelomen"
-__version__ = "1.1.0"
+__version__ = "1.2.0"
 
 
 """
 Change History
+Version 1.2.0 -- Gelomen
+* 优化用例描述显示
+* 错误和失败报告里可以放入多张截图
+
 Version 1.1.0 -- Gelomen
 * 优化报告截图写入方式
 
@@ -165,6 +169,7 @@ import unittest
 from xml.sax import saxutils
 import sys
 import os
+import re
 
 
 # 全局变量      -- Gelomen
@@ -756,7 +761,7 @@ table       { font-size: 100%; }
     </pre>
     </div>
     </td>
-    <td class="text-center" style="vertical-align: middle"><div id='div_%(tid)s_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">%(browser)s</div></br>截图：<a class="screenshot" href="javascript:void(0)" img="image/%(screenshot)s">img_%(screenshot)s</a></div></td>
+    <td class="text-center" style="vertical-align: middle"><div id='div_%(tid)s_screenshot' class="collapse in">浏览器版本：<div style="color: brown;">%(browser)s</div></br>截图：%(screenshot)s</div></td>
 </tr>
 """  # variables: (tid, Class, style, desc, status)
 
@@ -1116,7 +1121,7 @@ class HTMLTestRunner(Template_mixin):
             else:
                 name = "%s.%s" % (cls.__module__, cls.__name__)
             doc = cls.__doc__ and cls.__doc__.split("\n")[0] or ""
-            desc = doc and '%s: %s' % (name, doc) or name
+            desc = doc and '%s - %s' % (name, doc) or name
 
             row = self.REPORT_CLASS_TMPL % dict(
                 style=ne > 0 and 'errorClass' or nf > 0 and 'failClass' or 'passClass',
@@ -1162,7 +1167,7 @@ class HTMLTestRunner(Template_mixin):
         tid = tid_flag + 't%s_%s' % (cid + 1, tid + 1)
         name = t.id().split('.')[-1]
         doc = t.shortDescription() or ""
-        desc = doc and ('%s: %s' % (name, doc)) or name
+        desc = doc and ('%s - %s' % (name, doc)) or name
 
         # utf-8 支持中文 - Findyou
         # o and e should be byte string because they are collected from stdout and stderr?
@@ -1205,7 +1210,12 @@ class HTMLTestRunner(Template_mixin):
         else:
             tmpl = has_output and self.REPORT_TEST_WITH_OUTPUT_TMPL_1 or self.REPORT_TEST_NO_OUTPUT_TMPL
 
-            screenshot = u[u.find('errorImg[') + 9:u.find(']errorImg')]
+            screenshot_list = re.findall("errorImg\[(.*?)\]errorImg", u)
+            screenshot = ""
+            for i in screenshot_list:
+                screenshot += "</br><a class=\"screenshot\" href=\"javascript:void(0)\" img=\"image/" + i + "\">img_" + i + "</a>"
+
+            # screenshot = u[u.find('errorImg[') + 9:u.find(']errorImg')]
             browser = u[u.find('browser[') + 8:u.find(']browser')]
 
             row = tmpl % dict(

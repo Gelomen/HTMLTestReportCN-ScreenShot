@@ -8,6 +8,10 @@
 > * [boafantasy](https://github.com/boafantasy) 大神版本：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
+Version 1.2.0 -- Gelomen
+* 优化用例描述显示
+* 错误和失败报告里可以放入多张截图
+
 Version 1.1.0 -- Gelomen
 * 优化报告截图写入方式
 

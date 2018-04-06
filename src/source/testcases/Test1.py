@@ -18,6 +18,7 @@ class TestClass(unittest.TestCase):
         self.browser.quit()
 
     def test1_find_input(self):
+        """ UI自动化测试1 """
         try:
             # 正确值为 //input[@id='kw']
             self.browser.find_element_by_xpath("//input[@id='kw1']")
@@ -26,6 +27,7 @@ class TestClass(unittest.TestCase):
             raise
 
     def test2_assert_equal(self):
+        """ UI自动化测试2 """
         a = 1
         b = 2
         try:
@@ -34,6 +36,7 @@ class TestClass(unittest.TestCase):
             raise
 
     def test3_title(self):
+        """ UI自动化测试3 """
         title = self.browser.title
         try:
             # 加了个感叹号 ！
