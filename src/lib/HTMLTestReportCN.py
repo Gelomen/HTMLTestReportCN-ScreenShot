@@ -581,6 +581,7 @@ function html_escape(s) {
 <style type="text/css" media="screen">
 body        { font-family: Microsoft YaHei;padding: 20px; font-size: 100%; }
 table       { font-size: 100%; }
+td          { white-space: nowrap;}
 
 /* -- heading ---------------------------------------------------------------------- */
 .heading .description, .attribute {
@@ -703,12 +704,14 @@ table       { font-size: 100%; }
 </div>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
 <colgroup>
-<col align='left' />
+<col align='left' style="width: 300px;"/>
+<col align='right' style="width: 300px;"/>
 <col align='right' />
 <col align='right' />
 <col align='right' />
 <col align='right' />
 <col align='right' />
+<col align='right' style="width: 200px;"/>
 </colgroup>
 <tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
     <td>用例集/测试用例</td>

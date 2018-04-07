@@ -14,6 +14,7 @@
 <style type="text/css" media="screen">
 body        { font-family: Microsoft YaHei;padding: 20px; font-size: 100%; }
 table       { font-size: 100%; }
+td          { white-space: nowrap;}
 
 /* -- heading ---------------------------------------------------------------------- */
 .heading .description, .attribute {
@@ -372,8 +373,8 @@ function html_escape(s) {
 <div style="width: 650px; float: left;">
     <h1 style="font-family: Microsoft YaHei">自动化测试报告</h1>
     <p class='attribute'><strong>测试人员 : </strong> Gelomen</p>
-<p class='attribute'><strong>开始时间 : </strong> 2018-04-06 19:11:44</p>
-<p class='attribute'><strong>合计耗时 : </strong> 0:00:25.417817</p>
+<p class='attribute'><strong>开始时间 : </strong> 2018-04-07 14:54:06</p>
+<p class='attribute'><strong>合计耗时 : </strong> 0:00:24.743679</p>
 <p class='attribute'><strong>测试结果 : </strong> 共 5，通过 1，失败 3，错误 1，通过率 = 20.00%</p>
 <p class='attribute'><strong>失败用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#failCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='failCaseOl' class='collapse' style='float: left;'><li>test2_assert_equal (Test1.TestClass)</li><li>test3_title (Test1.TestClass)</li><li>test2 (Test2.TestClass)</li></ol></p>
 <p class='attribute'><strong>错误用例合集 : </strong> <div class='panel-default' style='float: left;'><a class='showDetail' data-toggle='collapse' href='#errorCaseOl' style='text-decoration: none;'>点击查看</a></div><ol id='errorCaseOl' class='collapse' style='float: left;'><li>test1_find_input (Test1.TestClass)</li></ol></p>
@@ -396,12 +397,14 @@ function html_escape(s) {
 </div>
 <table id='result_table' class="table table-condensed table-bordered table-hover">
 <colgroup>
-<col align='left' />
+<col align='left' style="width: 300px;"/>
+<col align='right' style="width: 300px;"/>
 <col align='right' />
 <col align='right' />
 <col align='right' />
 <col align='right' />
 <col align='right' />
+<col align='right' style="width: 200px;"/>
 </colgroup>
 <tr id='header_row' class="text-center success" style="font-weight: bold;font-size: 14px;">
     <td>用例集/测试用例</td>
@@ -421,7 +424,7 @@ function html_escape(s) {
     <td class="text-center">0</td>
     <td class="text-center">2</td>
     <td class="text-center">1</td>
-    <td class="text-center">25.41秒</td>
+    <td class="text-center">24.74秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c1',3)" class="detail" id='c1'>详细</a></td>
 </tr>
 
@@ -524,7 +527,7 @@ AssertionError: '百度一下，你就知道' != '百度一下，你就知道!'
     <td class="text-center">1</td>
     <td class="text-center">1</td>
     <td class="text-center">0</td>
-    <td class="text-center">0.01秒</td>
+    <td class="text-center">0.0秒</td>
     <td class="text-center"><a href="javascript:showClassDetail('c2',2)" class="detail" id='c2'>详细</a></td>
 </tr>
 
@@ -566,7 +569,7 @@ AssertionError: 1 != 2 : a ≠ b!
     <td>1</td>
     <td>3</td>
     <td>1</td>
-    <td>25.42秒</td>
+    <td>24.74秒</td>
     <td>通过率：20.00%</td>
 </tr>
 </table>
