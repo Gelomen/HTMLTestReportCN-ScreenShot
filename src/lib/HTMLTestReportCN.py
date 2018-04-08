@@ -581,7 +581,9 @@ function html_escape(s) {
 <style type="text/css" media="screen">
 body        { font-family: Microsoft YaHei;padding: 20px; font-size: 100%; }
 table       { font-size: 100%; }
-td          { white-space: nowrap;}
+.table tbody tr td{
+            vertical-align: middle;
+        }
 
 /* -- heading ---------------------------------------------------------------------- */
 .heading .description, .attribute {
