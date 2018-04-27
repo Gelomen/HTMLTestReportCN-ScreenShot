@@ -8,9 +8,6 @@
 > * [boafantasy](https://github.com/boafantasy) 大神版本：https://github.com/boafantasy/HTMLTestRunnerCN
 
 ## 版本
-Version 1.2.1 -- Gelomen
-* 删除项目下的 .idea 目录
-
 Version 1.2.0 -- Gelomen
 * 优化用例说明显示
 * 错误和失败报告里可以放入多张截图
