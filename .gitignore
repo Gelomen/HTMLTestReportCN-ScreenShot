@@ -1,0 +1,6 @@
+.idea
+venv
+*.iml
+report
+__pycache__
+*/__pycache__
