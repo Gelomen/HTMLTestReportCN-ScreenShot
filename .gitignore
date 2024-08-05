@@ -2,5 +2,6 @@
 venv
 *.iml
 report
+src/report
 __pycache__
 */__pycache__

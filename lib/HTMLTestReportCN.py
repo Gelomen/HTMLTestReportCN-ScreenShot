@@ -112,22 +112,37 @@ import re
 _global_dict = {}
 
 
-# 让新建的报告文件夹路径存入全局变量       -- Gelomen
-class GlobalMsg(object):
-    def __init__(self):
-        global _global_dict
-        _global_dict = {}
+# 设置参数
+def set_value(name, value):
+    _global_dict[name] = value
 
-    @staticmethod
-    def set_value(name, value):
-        _global_dict[name] = value
 
-    @staticmethod
-    def get_value(name):
-        try:
-            return _global_dict[name]
-        except KeyError:
-            return None
+# 获取参数
+def get_value(name):
+    try:
+        return _global_dict[name]
+    except KeyError:
+        return None
+
+
+# 设置报告目录路径
+def set_dir_path(dir_path):
+    set_value("dir_path", dir_path)
+
+
+# 获取报告目录路径
+def get_dir_path():
+    return get_value("dir_path")
+
+
+# 设置报告路径
+def set_report_path(report_path):
+    set_value("report_path", report_path)
+
+
+# 获取报告路径
+def get_report_path():
+    return get_value("report_path")
 
 
 # ------------------------------------------------------------------------
@@ -1193,46 +1208,38 @@ class HTMLTestRunner(Template_mixin):
         return self.ENDING_TMPL
 
 
-# 集成创建文件夹、保存截图、获得截图名字等方法，与HTMLTestReportCN交互从而实现嵌入截图  -- Gelomen
-class ReportDirectory(object):
+# 创建文件夹  -- Gelomen
+def create_dir(path="./report", title="Report Title"):
+    i = 1.0
 
-    def __init__(self, path="./report/"):
-        self.path = path
-        self.title = "Test Report"
+    dir_path = path + "/" + title + " v" + str(round(i, 1))
+    # 判断文件夹是否存在，不存在则创建
+    while True:
+        is_dir = os.path.isdir(dir_path)
+        if is_dir:
+            i += 0.1
+            dir_path = path + "/" + title + " v" + str(round(i, 1))
+        else:
+            break
 
-    def create_dir(self, title=None):
-        i = 1.0
+    os.makedirs(dir_path)
 
-        if title is not None:
-            self.title = title
+    # 测试报告路径
+    report_path = dir_path + "/" + title + " v" + str(round(i, 1)) + ".html"
 
-        dir_path = self.path + self.title + "v" + str(round(i, 1))
-        # 判断文件夹是否存在，不存在则创建
-        while True:
-            is_dir = os.path.isdir(dir_path)
-            if is_dir:
-                i += 0.1
-                dir_path = self.path + self.title + "v" + str(round(i, 1))
-            else:
-                break
+    # 将新建的 文件夹路径 和 报告路径 存入全局变量
+    set_dir_path(dir_path)
+    set_report_path(report_path)
 
-        os.makedirs(dir_path)
 
-        # 测试报告路径
-        report_path = dir_path + "/" + self.title + "v" + str(round(i, 1)) + ".html"
+# 获取截图并保存  -- Gelomen
+def get_screenshot(browser):
+    i = 1
 
-        # 将新建的 文件夹路径 和 报告路径 存入全局变量
-        GlobalMsg.set_value("dir_path", dir_path)
-        GlobalMsg.set_value("report_path", report_path)
-
-    @staticmethod
-    def get_screenshot(browser):
-        i = 1
-
-        # 通过全局变量获取文件夹路径
-        new_dir = GlobalMsg.get_value("dir_path")
-
-        img_dir = new_dir + "/image"
+    # 通过全局变量获取文件夹路径
+    new_dir = get_dir_path()
+    if new_dir is not None:
+        img_dir = new_dir + "/" + "image"
         # 判断文件夹是否存在，不存在则创建
         is_dir = os.path.isdir(img_dir)
         if not is_dir:
@@ -1258,6 +1265,32 @@ class ReportDirectory(object):
         browser_msg = browser_type + "(" + browser_version + ")"
 
         print("errorImg[" + img_name + "]errorImg, browser[" + browser_msg + "]browser")
+
+
+# 初始化报告目录      -- Gelomen
+def init(report_dir="./report", title="Test report"):
+    def decorator(func):
+        def wrapper(*args, **kwargs):
+            create_dir(path=report_dir, title=title)
+            result = func(*args, **kwargs)
+            return result
+
+        return wrapper
+
+    return decorator
+
+
+# 截图修饰器      -- Gelomen
+def screenshot(func):
+    def wrapper(test_object):
+        try:
+            result = func(test_object)
+            return result
+        except Exception:
+            get_screenshot(test_object.browser)
+            raise
+
+    return wrapper
 
 
 ##############################################################################
